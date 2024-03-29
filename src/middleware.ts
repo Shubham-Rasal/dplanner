@@ -20,9 +20,9 @@ export async function middleware(req: NextRequest) {
     data: { session },
   } = await supabase.auth.getSession();
 
-  if (req.nextUrl.pathname.startsWith("/dashboard") && !session) {
-    return NextResponse.redirect(new URL("/login", req.url));
-  }
+  // if (req.nextUrl.pathname.startsWith("/dashboard") && !session) {
+  //   return NextResponse.redirect(new URL("/login", req.url));
+  // }
 
   //   http://localhost:3000/dashboard#error=unauthorized_client&error_code=401&error_description=Email+link+is+invalid+or+has+expired
 

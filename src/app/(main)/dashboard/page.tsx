@@ -1,32 +1,15 @@
-"use client";
 import React from "react";
-import { useSupabaseUser } from "@/components/providers/user-provider";
-import { useWorkspace } from "@/components/providers/workspace-provider";
-import { createWorkspace } from "@/lib/server-actions/workspace-actions";
-import CreateWorkspace from "@/components/create-workspace";
-import { useRouter } from "next/navigation";
-import { SkeletonDemo } from "@/components/loader-skeleton";
+
 const DashboardPage = () => {
-  const router = useRouter();
-  const { workspace } = useWorkspace();
-  const { user } = useSupabaseUser();
-
-  if (!user) return <SkeletonDemo />;
-
-  if (!workspace)
-    return (
-      <div className="flex flex-col items-center">
-        <h1 className="text-2xl font-bold">Welcome {user.email}</h1>
-        <p className="text-lg text-center">
-          You don&apos;t have any workspaces yet. Create one to get started.
-        </p>
-        <CreateWorkspace createWorkspace={createWorkspace} />
+  return (
+    <div className="border-l-[1px] border-t-[1px] pb-20 h-screen rounded-l-3xl border-muted-foreground/20 overflow-scroll ">
+      <div className="flex flex-col gap-4 relative">
+        <h1 className="text-4xl sticky top-0 z-[10] p-6 bg-background/50 backdrop-blur-lg flex items-center border-b">
+          Dashboard
+        </h1>
       </div>
-    );
-  else {
-    router.push(`/dashboard/${workspace.id}`);
-    return <div>Redirecting...</div>;
-  }
+    </div>
+  );
 };
 
 export default DashboardPage;

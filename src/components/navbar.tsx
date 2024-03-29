@@ -4,76 +4,41 @@ import * as React from "react";
 import Link from "next/link";
 
 import { cn } from "@/lib/utils";
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu";
 import { Button } from "./ui/button";
 import { useSupabaseUser } from "./providers/user-provider";
+import { MenuIcon } from "lucide-react";
+import Image from "next/image";
 
 export function Navbar() {
   const { user } = useSupabaseUser();
 
   return (
-    <NavigationMenu>
-      <NavigationMenuList>
-        <NavigationMenuItem>
-          <Link href="/" legacyBehavior passHref>
-            <Button variant={"link"}>Home</Button>
-          </Link>
-        </NavigationMenuItem>
-        {/* <NavigationMenuItem className="">
-          <Link href="/builder" legacyBehavior passHref>
-            <Button variant={"link"}>Plan Builder</Button>
-          </Link>
-        </NavigationMenuItem> */}
-        {!user && (
-          <NavigationMenuItem className="">
-            <Link href="/login" legacyBehavior passHref>
-              <Button variant={"link"}>Login</Button>
-            </Link>
-          </NavigationMenuItem>
-        )}
+    <header className="fixed right-0 left-0 top-0 py-4 px-4 bg-black/40 backdrop-blur-lg z-[100] flex items-center border-b-[1px] border-neutral-900 justify-between w-screen">
+      <aside className="flex items-center gap-[2px]">
+        <p className="text-3xl font-bold">Flow</p>
+        <Image
+          src="/fuzzieLogo.png"
+          width={15}
+          height={15}
+          alt="fuzzie logo"
+          className="shadow-sm"
+        />
+        <p className="text-3xl font-bold">Forge</p>
+      </aside>
 
-        {user && (
-          <NavigationMenuItem className="">
-            <Link href="/dashboard" legacyBehavior passHref>
-              <Button variant={"link"}>Dashboard</Button>
-            </Link>
-          </NavigationMenuItem>
-        )}
-      </NavigationMenuList>
-    </NavigationMenu>
+      <aside className="flex items-center gap-4">
+        <Link
+          href="/dashboard"
+          className="relative inline-flex h-10 overflow-hidden rounded-full p-[2px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
+        >
+          <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
+          <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-3 py-1 text-sm font-medium text-white backdrop-blur-3xl">
+            {user ? "Dashboard" : "Get Started"}
+          </span>
+        </Link>
+        {user ? <Button /> : null}
+        <MenuIcon className="md:hidden" />
+      </aside>
+    </header>
   );
 }
-
-const ListItem = React.forwardRef<
-  React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a">
->(({ className, title, children, ...props }, ref) => {
-  return (
-    <li>
-      <NavigationMenuLink asChild>
-        <a
-          ref={ref}
-          className={cn(
-            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-            className
-          )}
-          {...props}
-        >
-          <div className="text-sm font-medium leading-none">{title}</div>
-          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-            {children}
-          </p>
-        </a>
-      </NavigationMenuLink>
-    </li>
-  );
-});
-ListItem.displayName = "ListItem";

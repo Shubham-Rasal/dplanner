@@ -1,55 +1,197 @@
+import { CardBody, CardContainer, CardItem } from "@/components/global/3d-card";
+import { HeroParallax } from "@/components/global/connect-parallax";
+import { ContainerScroll } from "@/components/global/container-scroll-animation";
+import { InfiniteMovingCards } from "@/components/global/infinite-moving-cards";
+import { LampComponent } from "@/components/global/lamp";
 import { WaitlistForm } from "@/components/join-waitlist";
+import { Navbar } from "@/components/navbar";
+import { Button } from "@/components/ui/button";
+import { clients, products } from "@/lib/constant";
+import { CheckIcon } from "lucide-react";
 
 const HomePage = () => {
-
   return (
-    <section className="flex flex-col h-fit  bg-gradient-radial from-0% via-50% to-100% bg-no-repeat from-indigo-500/20 to-transparent">
-      <div className="mx-auto flex w-full max-w-5xl flex-col px-4 py-16 sm:px-6 sm:py-28 lg:px-2 items-center">
-        <div className="flex max-w-2xl  px-1 lg:px-0">
-          <div className="flex flex-col mt-4 items-center">
-            <h1 className="dark:text-slate-200 text-slate-800 font-title font-bold text-4xl sm:text-5xl lg:text-6xl leading-tight sm:leading-[3rem] lg:leading-[4rem] pb-6 text-center">
-              The only
-              <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-                Life Planner
+    <main className="flex items-center justify-center flex-col">
+      <Navbar />
+      <section className="w-full h-screen  bg-neutral-950 rounded-md  !overflow-visible relative flex flex-col items-center  antialiased">
+        <div className="absolute inset-0  h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_35%,#223_100%)]"></div>
+        <div className="flex flex-col mt-[-100px] md:mt-[-50px]">
+          <ContainerScroll
+            titleComponent={
+              <div className="flex items-center flex-col">
+                <Button
+                  size={"lg"}
+                  className="p-8 mb-8 md:mb-0 text-2xl w-full sm:w-fit border-t-2 rounded-full border-[#4D4D4D] bg-[#1F1F1F] hover:bg-white group transition-all flex items-center justify-center gap-4 hover:shadow-xl hover:shadow-neutral-500 duration-500"
+                >
+                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-neutral-500 to-neutral-600  md:text-center font-sans group-hover:bg-gradient-to-r group-hover:from-black goup-hover:to-black">
+                    Start For Free Today
+                  </span>
+                </Button>
+                <h1 className="text-5xl md:text-8xl  bg-clip-text text-transparent bg-gradient-to-b from-white to-neutral-600 font-sans font-bold">
+                  Automate Your Work With Fuzzie
+                </h1>
               </div>
-              you need to be
-              <div className="bg-gradient-to-r from-slate-600 to-stone-600  bg-clip-text text-transparent">
-                Accountable
+            }
+          />
+        </div>
+      </section>
+
+      <InfiniteMovingCards
+        className="md:mt-[32rem] mt-[-100px]"
+        items={clients}
+        direction="right"
+        speed="normal"
+      />
+      <section>
+        <HeroParallax products={products}></HeroParallax>
+      </section>
+      <section className="mt-[5rem]">
+        <LampComponent />
+        <div className="flex flex-wrap items-center justify-center flex-col md:flex-row gap-8 -mt-72">
+          <CardContainer className="inter-var ">
+            <CardBody className="bg-gray-50 relative group/card  dark:hover:shadow-2xl dark:hover:shadow-neutral-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-full md:!w-[350px] h-auto rounded-xl p-6 border">
+              <CardItem
+                translateZ="50"
+                className="text-xl font-bold text-neutral-600 dark:text-white "
+              >
+                Hobby
+                <h2 className="text-6xl ">$0</h2>
+              </CardItem>
+              <CardItem
+                translateZ="60"
+                className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300"
+              >
+                Get a glimpse of what our software is capable of. Just a heads
+                up {"you'll"} never leave us after this!
+                <ul className="my-4 flex flex-col gap-2">
+                  <li className="flex items-center gap-2">
+                    <CheckIcon />3 Free automations
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckIcon />
+                    100 tasks per month
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckIcon />
+                    Two-step Actions
+                  </li>
+                </ul>
+              </CardItem>
+              <div className="flex justify-between items-center mt-8">
+                <CardItem
+                  translateZ={20}
+                  as="button"
+                  className="px-4 py-2 rounded-xl text-xs font-normal dark:text-white"
+                >
+                  Try now →
+                </CardItem>
+                <CardItem
+                  translateZ={20}
+                  as="button"
+                  className="px-4 py-2 rounded-xl bg-black dark:bg-white dark:text-black text-white text-xs font-bold"
+                >
+                  Get Started Now
+                </CardItem>
               </div>
-            </h1>
-          </div>
+            </CardBody>
+          </CardContainer>
+          <CardContainer className="inter-var ">
+            <CardBody className="bg-gray-50 relative group/card  dark:hover:shadow-2xl dark:hover:shadow-neutral-500/[0.1] dark:bg-black dark:border-[#E2CBFF] border-black/[0.1] w-full md:!w-[350px] h-auto rounded-xl p-6 border">
+              <CardItem
+                translateZ="50"
+                className="text-xl font-bold text-neutral-600 dark:text-white "
+              >
+                Pro Plan
+                <h2 className="text-6xl ">$29</h2>
+              </CardItem>
+              <CardItem
+                translateZ="60"
+                className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300"
+              >
+                Get a glimpse of what our software is capable of. Just a heads
+                up {"you'll"} never leave us after this!
+                <ul className="my-4 flex flex-col gap-2">
+                  <li className="flex items-center gap-2">
+                    <CheckIcon />3 Free automations
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckIcon />
+                    100 tasks per month
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckIcon />
+                    Two-step Actions
+                  </li>
+                </ul>
+              </CardItem>
+              <div className="flex justify-between items-center mt-8">
+                <CardItem
+                  translateZ={20}
+                  as="button"
+                  className="px-4 py-2 rounded-xl text-xs font-normal dark:text-white"
+                >
+                  Try now →
+                </CardItem>
+                <CardItem
+                  translateZ={20}
+                  as="button"
+                  className="px-4 py-2 rounded-xl bg-black dark:bg-white dark:text-black text-white text-xs font-bold"
+                >
+                  Get Started Now
+                </CardItem>
+              </div>
+            </CardBody>
+          </CardContainer>
+          <CardContainer className="inter-var ">
+            <CardBody className="bg-gray-50 relative group/card  dark:hover:shadow-2xl dark:hover:shadow-neutral-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-full md:!w-[350px] h-auto rounded-xl p-6 border">
+              <CardItem
+                translateZ="50"
+                className="text-xl font-bold text-neutral-600 dark:text-white "
+              >
+                Unlimited
+                <h2 className="text-6xl ">$99</h2>
+              </CardItem>
+              <CardItem
+                translateZ="60"
+                className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300"
+              >
+                Get a glimpse of what our software is capable of. Just a heads
+                up {"you'll"} never leave us after this!
+                <ul className="my-4 flex flex-col gap-2">
+                  <li className="flex items-center gap-2">
+                    <CheckIcon />3 Free automations
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckIcon />
+                    100 tasks per month
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckIcon />
+                    Two-step Actions
+                  </li>
+                </ul>
+              </CardItem>
+              <div className="flex justify-between items-center mt-8">
+                <CardItem
+                  translateZ={20}
+                  as="button"
+                  className="px-4 py-2 rounded-xl text-xs font-normal dark:text-white"
+                >
+                  Try now →
+                </CardItem>
+                <CardItem
+                  translateZ={20}
+                  as="button"
+                  className="px-4 py-2 rounded-xl bg-black dark:bg-white dark:text-black text-white text-xs font-bold"
+                >
+                  Get Started Now
+                </CardItem>
+              </div>
+            </CardBody>
+          </CardContainer>
         </div>
-        <div className="relative  flex justify-center items-center">
-          <WaitlistForm />
-        </div>
-      </div>
-
-      {/* <div className="h-screen flex items-center justify-center">
-        <Glow>
-          <NewRelease />
-        </Glow>
-      </div> */}
-
-      {/* <div className="mb-8 flex">
-        <a
-          href="https://github.com/ibelick/background-snippets"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex"
-        >
-          <span className="relative inline-block overflow-hidden rounded-full p-[1px]">
-            <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#a9a9a9_0%,#0c0c0c_50%,#a9a9a9_100%)] dark:bg-[conic-gradient(from_90deg_at_50%_50%,#171717_0%,#737373_50%,#171717_100%)]" />
-            <div className="inline-flex h-full w-full cursor-pointer justify-center rounded-full bg-white px-3 py-1 text-xs font-medium leading-5 text-slate-600 backdrop-blur-xl dark:bg-black dark:text-slate-200">
-              New snippets ⚡️
-              <span className="inline-flex items-center pl-2 text-black dark:text-white">
-                Read more{" "}
-              </span>
-            </div>
-          </span>
-        </a>
-      </div> */}
-
-    </section>
+      </section>
+    </main>
   );
 };
 
