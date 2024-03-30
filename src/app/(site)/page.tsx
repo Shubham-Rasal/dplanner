@@ -13,7 +13,7 @@ const HomePage = () => {
   return (
     <main className="flex items-center justify-center flex-col">
       <Navbar />
-      <section className="w-full h-screen  bg-neutral-950 rounded-md  !overflow-visible relative flex flex-col items-center  antialiased">
+      <section className=" h-screen  bg-neutral-950 rounded-md  !overflow-visible relative flex flex-col items-center  antialiased">
         <div className="absolute inset-0  h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_35%,#223_100%)]"></div>
         <div className="flex flex-col mt-[-100px] md:mt-[-50px]">
           <ContainerScroll
@@ -37,15 +37,15 @@ const HomePage = () => {
       </section>
 
       <InfiniteMovingCards
-        className="md:mt-[32rem] mt-[-100px]"
+        className="md:mt-[32rem] mt-[-100px] w-screen"
         items={clients}
         direction="right"
         speed="normal"
       />
-      <section>
+      <section className="w-screen">
         <HeroParallax products={products}></HeroParallax>
       </section>
-      <section className="mt-[5rem]">
+      <section className="mt-[5rem] w-screen">
         <LampComponent />
         <div className="flex flex-wrap items-center justify-center flex-col md:flex-row gap-8 -mt-72">
           <CardContainer className="inter-var ">

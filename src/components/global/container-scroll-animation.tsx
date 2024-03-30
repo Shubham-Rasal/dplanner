@@ -94,9 +94,9 @@ export const Card = ({
         <Image
           src="/temp-banner.png"
           height={400}
-          width={800}
+          width={1000}
           alt="bannerImage"
-          className="object-cover border-8 rounded-2xl"
+          className=" w-full object-cover border-8 rounded-2xl"
         />
       </div>
     </motion.div>
