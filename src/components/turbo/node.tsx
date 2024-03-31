@@ -1,6 +1,5 @@
 import React, { memo, ReactNode, useMemo } from "react";
 import { Handle, NodeProps, Position } from "reactflow";
-import { UpdateDrawer } from "../drawer-demo";
 import { LockClosedIcon, LockOpen2Icon } from "@radix-ui/react-icons";
 import { Badge, CheckCircle } from "lucide-react";
 import { Card, CardDescription, CardHeader, CardTitle } from "../ui/card";
