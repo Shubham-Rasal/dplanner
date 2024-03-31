@@ -26,6 +26,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { TurboNodeData } from "@/components/turbo/node";
+import { useFlowStore } from "@/components/turbo/store";
+import EditorCanvasIconHelper from "../../../_components/editor-canvas-card-icon-hepler";
 // import RenderConnectionAccordion from "./render-connection-accordion";
 // import RenderOutputAccordion from "./render-output-accordian";
 // import { useFuzzieStore } from "@/store";
@@ -35,7 +37,7 @@ type Props = {
 };
 
 const EditorCanvasSidebar = ({ nodes }: Props) => {
-  // const { state } = useEditor();
+  const { selectedNode } = useFlowStore();
   // const { nodeConnection } = useNodeConnections();
   // const { googleFile, setSlackChannels } = useFuzzieStore();
   // useEffect(() => {
@@ -84,7 +86,7 @@ const EditorCanvasSidebar = ({ nodes }: Props) => {
                 }
               >
                 <CardHeader className="flex flex-row items-center gap-4 p-4">
-                  {/* <EditorCanvasIconHelper type={cardKey as EditorCanvasTypes} /> */}
+                  <EditorCanvasIconHelper type={cardKey as EditorCanvasTypes} />
                   <CardTitle className="text-md">
                     {cardKey}
                     <CardDescription>{cardValue.description}</CardDescription>
@@ -95,7 +97,7 @@ const EditorCanvasSidebar = ({ nodes }: Props) => {
         </TabsContent>
         <TabsContent value="settings" className="-mt-6">
           <div className="px-2 py-4 text-center text-xl font-bold">
-            {/* {state.editor.selectedNode.data.title} */}
+            {selectedNode.data.title}
           </div>
         </TabsContent>
       </Tabs>

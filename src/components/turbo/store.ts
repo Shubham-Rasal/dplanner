@@ -14,51 +14,43 @@ import {
   getBoundsOfRects,
 } from "reactflow";
 import { create } from "zustand";
-import { TurboNodeData } from "./node";
-import { GoalSchema } from "../update-goal";
 import * as z from "zod";
 import { v4 } from "uuid";
 import { useCallback } from "react";
+import {
+  EditorCanvasCardType,
+  EditorCanvasTypes,
+  EditorNodeType,
+} from "@/lib/types";
+import { EditorCanvasDefaultCardTypes } from "@/lib/constant";
 
 export interface RFState {
-  nodes: Node<TurboNodeData>[];
+  nodes: Node<EditorCanvasCardType>[];
   edges: Edge[];
+  selectedNode: EditorNodeType;
   onNodesChange: OnNodesChange;
   onEdgesChange: OnEdgesChange;
   onConnect: OnConnect;
   onDragOver: (event: React.DragEvent<HTMLDivElement>) => void;
   onDrop: (event: React.DragEvent<HTMLDivElement>) => void;
-  updateNode: (nodeId: string, data: z.infer<typeof GoalSchema>) => void;
-  createNode: (data: z.infer<typeof GoalSchema>) => void;
+  createNode: (data: EditorCanvasCardType) => void;
+  setSelectedNode: (node: EditorNodeType) => void;
 }
 
 export const useFlowStore = create<RFState>((set, get) => ({
   nodes: [
     {
       id: "1",
+      type: "Trigger",
       position: { x: 0, y: 0 },
       data: {
-        attachable: true,
-        description: "what is the main goal?",
-        goal: "complete the project",
-        time: "12:00",
-        date: new Date(),
-        type: "daily",
+        completed: false,
+        current: false,
+        description: "",
+        metadata: {},
+        title: "",
+        type: "Trigger",
       },
-      type: "turbo",
-    },
-    {
-      id: "2",
-      position: { x: 250, y: 0 },
-      data: {
-        attachable: true,
-        description: "what is the main goal?",
-        goal: "complete the dsa project.",
-        time: "12:00",
-        date: new Date(),
-        type: "daily",
-      },
-      type: "turbo",
     },
   ],
 
@@ -70,6 +62,27 @@ export const useFlowStore = create<RFState>((set, get) => ({
       animated: true,
     },
   ],
+
+  selectedNode: {
+    data: {
+      completed: false,
+      current: false,
+      description: "",
+      metadata: {},
+      title: "",
+      type: "Trigger",
+    },
+    id: "",
+    position: { x: 0, y: 0 },
+    type: "Trigger",
+  },
+
+  setSelectedNode: (node: EditorNodeType) => {
+    set({
+      selectedNode: node,
+    });
+  },
+
   onNodesChange: (changes: NodeChange[]) => {
     set({
       nodes: applyNodeChanges(changes, get().nodes),
@@ -103,17 +116,17 @@ export const useFlowStore = create<RFState>((set, get) => ({
       x: event.clientX - boundingRect.x,
       y: event.clientY - boundingRect.y,
     };
-    const newNode: Node<TurboNodeData> = {
+    const newNode: EditorNodeType = {
       id: v4(),
       position: position,
-      type: "turbo",
+      type: "Trigger",
       data: {
-        attachable: true,
-        description: "what is the main goal?",
-        goal: "complete the dsa project.",
-        time: "12:00",
-        date: new Date(),
-        type: "daily",
+        completed: false,
+        current: false,
+        description: "",
+        metadata: {},
+        title: "",
+        type: "Trigger",
       },
     };
 
@@ -138,20 +151,20 @@ export const useFlowStore = create<RFState>((set, get) => ({
     });
   },
 
-  updateNode: (nodeId: string, data: z.infer<typeof GoalSchema>) => {
-    const nodes = get().nodes;
-    const node = nodes.find((node) => node.id === nodeId);
-    if (node) {
-      node.data = data;
-      set({ nodes: [...nodes] });
-    }
-  },
-  createNode: (data: z.infer<typeof GoalSchema>) => {
-    const newNode: Node<TurboNodeData> = {
+  // updateNode: (nodeId: string, data: z.infer<typeof GoalSchema>) => {
+  //   const nodes = get().nodes;
+  //   const node = nodes.find((node) => node.id === nodeId);
+  //   if (node) {
+  //     node.data = data;
+  //     set({ nodes: [...nodes] });
+  //   }
+  // },
+  createNode: (data: EditorCanvasCardType) => {
+    const newNode: EditorNodeType = {
       id: v4(),
       position: { x: 0, y: 0 },
       data: data,
-      type: "turbo",
+      type: "Trigger",
     };
 
     set({

@@ -6,19 +6,23 @@ import { Badge, CheckCircle } from "lucide-react";
 import { Card, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import clsx from "clsx";
 import EditorCanvasIconHelper from "@/app/(main)/workflows/_components/editor-canvas-card-icon-hepler";
+import { useFlowStore } from "./store";
+import { EditorCanvasCardType, EditorNodeType } from "@/lib/types";
 
-export type TurboNodeData = {
-  type: "trigger" | "action";
-  time: string;
-  title: string;
-  description: string;
-};
+// export type TurboNodeData = {
+//   type: "trigger" | "action";
+//   time: string;
+//   title: string;
+//   description: string;
+// };
 
-const TurboNode = (props: NodeProps<TurboNodeData>) => {
+const TurboNode = (props: NodeProps<EditorCanvasCardType>) => {
   const { data } = props;
+  const { setSelectedNode, nodes } = useFlowStore();
+
   const logo = useMemo(() => {
-    return <EditorCanvasIconHelper type="Google Drive" />
-  }, [])
+    return <EditorCanvasIconHelper type="Google Drive" />;
+  }, []);
   return (
     <>
       <Handle
@@ -27,17 +31,11 @@ const TurboNode = (props: NodeProps<TurboNodeData>) => {
         className="!-bottom-2 !h-4 !w-4 dark:bg-neutral-800 z-10"
       />
       <Card
-        // onClick={(e) => {
-        //   e.stopPropagation();
-        //   const val = state.editor.elements.find((n) => n.id === nodeId);
-        //   if (val)
-        //     dispatch({
-        //       type: "SELECTED_ELEMENT",
-        //       payload: {
-        //         element: val,
-        //       },
-        //     });
-        // }}
+        onClick={() => {
+          const nodeToSet = nodes.find((node) => node.id === props.id);
+          const node = nodeToSet as EditorNodeType;
+          setSelectedNode(node);
+        }}
         className="relative max-w-[400px] dark:border-muted-foreground/70"
       >
         <CardHeader className="flex flex-row items-center gap-4">

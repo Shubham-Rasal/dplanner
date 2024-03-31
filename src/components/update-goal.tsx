@@ -24,6 +24,8 @@ import { DrawerClose, DrawerFooter } from "./ui/drawer";
 import { TurboNodeData } from "./turbo/node";
 import { useFlowStore, RFState } from "./turbo/store";
 import { NodeProps } from "reactflow";
+import { title } from "process";
+import { EditorCanvasDefaultCardTypes } from "@/lib/constant";
 //make a ts enum for goal types
 const goalTypes = [
   "daily",
@@ -33,14 +35,6 @@ const goalTypes = [
   "yearly",
 ] as const;
 
-export const GoalSchema = z.object({
-  type: z.enum(goalTypes),
-  date: z.date(),
-  time: z.string(),
-  description: z.string(),
-  goal: z.string().max(50),
-  attachable: z.boolean(),
-});
 
 export default function UpdateGoal({ data, id }: NodeProps<TurboNodeData>) {
   const form = useForm<z.infer<typeof GoalSchema>>({
