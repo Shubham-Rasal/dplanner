@@ -17,27 +17,8 @@ const TurboNode = (props: NodeProps<TurboNodeData>) => {
   const { data } = props;
   return (
     <>
-      <div className="cloud gradient">
-        <div className="bg-white dark:bg-slate-900">
-          {props.data.attachable ? <CheckCircle /> : <LockClosedIcon />}
-        </div>
-      </div>
-      <div className="wrapper gradient">
-        <div className="inner">
-            <UpdateDrawer {...props} />
-        </div>
-        <Handle
-          className="w-5 h-5"
-          type="target"
-          position={Position.Top}
-          isConnectable={data.attachable}
-        />
-        <Handle
-          className="bg-teal-200"
-          type="source"
-          position={Position.Bottom}
-          isConnectable={data.attachable}
-        />
+      <div className="">
+       test
       </div>
     </>
   );

@@ -32,7 +32,6 @@ const selector = (state: RFState) => ({
 });
 
 import "reactflow/dist/base.css";
-import "./index.css";
 import TurboNode, { TurboNodeData } from "./node";
 import TurboEdge from "./edge";
 import { CreateDrawer } from "../create-drawer";
