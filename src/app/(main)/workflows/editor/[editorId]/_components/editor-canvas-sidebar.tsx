@@ -33,12 +33,13 @@ import {
 // import { TurboNodeData } from "@/components/turbo/node";
 import { useFlowStore } from "@/components/turbo/store";
 import EditorCanvasIconHelper from "../../../_components/editor-canvas-card-icon-hepler";
+import { Node } from "reactflow";
 // import RenderConnectionAccordion from "./render-connection-accordion";
 // import RenderOutputAccordion from "./render-output-accordian";
 // import { useFuzzieStore } from "@/store";
 
 type Props = {
-  nodes: EditorNodeType[];
+  nodes: Node<EditorCanvasCardType>[];
 };
 
 const EditorCanvasSidebar = ({ nodes }: Props) => {
@@ -108,7 +109,11 @@ const EditorCanvasSidebar = ({ nodes }: Props) => {
           <div className="px-2 py-4 text-center text-xl font-bold">
             {selectedNode.data.title}
           </div>
-         
+         <div className="">Input</div>
+         <div className="">Actions</div>
+         <div className="">Output</div>
+         <button>Delete</button>
+         <button>Save</button>
         </TabsContent>
       </Tabs>
     </aside>

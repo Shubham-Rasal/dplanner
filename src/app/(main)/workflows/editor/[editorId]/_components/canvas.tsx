@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { Builder } from "@/components/builder";
 import TurboBuilder from "@/components/turbo/builder";
 import {
@@ -11,7 +11,7 @@ import { useEdgesState, useNodesState } from "reactflow";
 import { useFlowStore } from "@/components/turbo/store";
 
 export function Canvas() {
-  const {nodes , edges} = useFlowStore();
+  const { nodes, edges } = useFlowStore();
   return (
     <ResizablePanelGroup
       direction="horizontal"

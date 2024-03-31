@@ -34,7 +34,6 @@ const selector = (state: RFState) => ({
 import "reactflow/dist/base.css";
 import TurboNode from "./node";
 import TurboEdge from "./edge";
-import { CreateDrawer } from "../create-drawer";
 
 const nodeTypes = {
   Trigger: TurboNode,
@@ -72,12 +71,6 @@ const TurboBuilder = () => {
         edgeTypes={edgeTypes}
         defaultEdgeOptions={defaultEdgeOptions}
       >
-        <Controls
-          showInteractive={true}
-          className="bg-white text-black dark:bg-slate-900"
-        >
-          <CreateDrawer />
-        </Controls>
         <svg>
           <defs>
             <linearGradient id="edge-gradient">
