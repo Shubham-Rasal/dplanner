@@ -1,3 +1,4 @@
+'use client'
 import { Builder } from "@/components/builder";
 import TurboBuilder from "@/components/turbo/builder";
 import {
@@ -5,8 +6,12 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
+import EditorCanvasSidebar from "./editor-canvas-sidebar";
+import { useEdgesState, useNodesState } from "reactflow";
+import { useFlowStore } from "@/components/turbo/store";
 
 export function Canvas() {
+  const {nodes , edges} = useFlowStore();
   return (
     <ResizablePanelGroup
       direction="horizontal"
@@ -18,7 +23,7 @@ export function Canvas() {
       <ResizableHandle withHandle />
       <ResizablePanel defaultSize={30}>
         <div className="flex h-full items-center justify-center p-6">
-          <span className="font-semibold">Content</span>
+          <EditorCanvasSidebar nodes={nodes} />
         </div>
       </ResizablePanel>
     </ResizablePanelGroup>
