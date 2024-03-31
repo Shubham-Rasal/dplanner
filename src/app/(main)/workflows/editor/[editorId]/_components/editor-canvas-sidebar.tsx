@@ -1,5 +1,10 @@
 "use client";
-import { EditorCanvasCardType, EditorCanvasTypes, EditorNodeType } from "@/lib/types";
+import {
+  EditorCanvasCardType,
+  EditorCanvasTypes,
+  EditorNodeType,
+} from "@/lib/types";
+
 // import { useNodeConnections } from "@/providers/connections-provider";
 // import { useEditor } from "@/providers/editor-provider";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -25,7 +30,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { TurboNodeData } from "@/components/turbo/node";
+// import { TurboNodeData } from "@/components/turbo/node";
 import { useFlowStore } from "@/components/turbo/store";
 import EditorCanvasIconHelper from "../../../_components/editor-canvas-card-icon-hepler";
 // import RenderConnectionAccordion from "./render-connection-accordion";
@@ -33,11 +38,12 @@ import EditorCanvasIconHelper from "../../../_components/editor-canvas-card-icon
 // import { useFuzzieStore } from "@/store";
 
 type Props = {
-  nodes: TurboNodeData[];
+  nodes: EditorNodeType[];
 };
 
 const EditorCanvasSidebar = ({ nodes }: Props) => {
   const { selectedNode } = useFlowStore();
+  console.log(selectedNode);
   // const { nodeConnection } = useNodeConnections();
   // const { googleFile, setSlackChannels } = useFuzzieStore();
   // useEffect(() => {
@@ -58,13 +64,16 @@ const EditorCanvasSidebar = ({ nodes }: Props) => {
   const onDragStart = (event: any, nodeType: EditorCanvasCardType["type"]) => {
     event.dataTransfer.setData("application/reactflow", nodeType);
     event.dataTransfer.effectAllowed = "move";
-    console.log("start")
+    console.log(nodeType);
   };
 
   return (
     <aside>
-      <Tabs defaultValue="actions" className="h-screen overflow-scroll pb-24">
-        <TabsList className="bg-transparent">
+      <Tabs
+        defaultValue="actions"
+        className="h-screen w-full overflow-scroll pb-24"
+      >
+        <TabsList className="bg-transparent w-full p-8">
           <TabsTrigger value="actions">Actions</TabsTrigger>
           <TabsTrigger value="settings">Settings</TabsTrigger>
         </TabsList>
@@ -99,6 +108,7 @@ const EditorCanvasSidebar = ({ nodes }: Props) => {
           <div className="px-2 py-4 text-center text-xl font-bold">
             {selectedNode.data.title}
           </div>
+         
         </TabsContent>
       </Tabs>
     </aside>

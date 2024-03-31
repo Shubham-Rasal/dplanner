@@ -37,7 +37,7 @@ import TurboEdge from "./edge";
 import { CreateDrawer } from "../create-drawer";
 
 const nodeTypes = {
-  turbo: TurboNode,
+  Trigger: TurboNode,
 };
 
 const edgeTypes = {
@@ -67,6 +67,7 @@ const TurboBuilder = () => {
         onDrop={onDrop}
         onDragOver={onDragOver}
         fitView
+        snapToGrid
         nodeTypes={nodeTypes}
         edgeTypes={edgeTypes}
         defaultEdgeOptions={defaultEdgeOptions}

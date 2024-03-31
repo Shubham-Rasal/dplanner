@@ -46,9 +46,9 @@ export const useFlowStore = create<RFState>((set, get) => ({
       data: {
         completed: false,
         current: false,
-        description: "",
+        description: "This is desc",
         metadata: {},
-        title: "",
+        title: "This is a trigger",
         type: "Trigger",
       },
     },
@@ -116,6 +116,10 @@ export const useFlowStore = create<RFState>((set, get) => ({
       x: event.clientX - boundingRect.x,
       y: event.clientY - boundingRect.y,
     };
+
+    const { type, description } =
+      EditorCanvasDefaultCardTypes[data as EditorCanvasTypes];
+
     const newNode: EditorNodeType = {
       id: v4(),
       position: position,
@@ -123,10 +127,10 @@ export const useFlowStore = create<RFState>((set, get) => ({
       data: {
         completed: false,
         current: false,
-        description: "",
+        description,
         metadata: {},
-        title: "",
-        type: "Trigger",
+        title: data,
+        type: data as EditorCanvasTypes,
       },
     };
 
@@ -160,11 +164,21 @@ export const useFlowStore = create<RFState>((set, get) => ({
   //   }
   // },
   createNode: (data: EditorCanvasCardType) => {
+    const { description } = EditorCanvasDefaultCardTypes[data.type];
+
     const newNode: EditorNodeType = {
       id: v4(),
       position: { x: 0, y: 0 },
-      data: data,
-      type: "Trigger",
+      data: {
+        completed: false,
+        current: false,
+        description,
+        metadata: {},
+        title: data.type,
+        type: data.type,
+      },
+
+      type: data.type,
     };
 
     set({
