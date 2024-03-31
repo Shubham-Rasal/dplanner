@@ -1,22 +1,24 @@
-import React, { memo, ReactNode } from "react";
+import React, { memo, ReactNode, useMemo } from "react";
 import { Handle, NodeProps, Position } from "reactflow";
 import { UpdateDrawer } from "../drawer-demo";
 import { LockClosedIcon, LockOpen2Icon } from "@radix-ui/react-icons";
 import { Badge, CheckCircle } from "lucide-react";
 import { Card, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import clsx from "clsx";
+import EditorCanvasIconHelper from "@/app/(main)/workflows/_components/editor-canvas-card-icon-hepler";
 
 export type TurboNodeData = {
-  type: "daily" | "weekly" | "monthly" | "quarterly" | "yearly";
-  date: Date;
+  type: "trigger" | "action";
   time: string;
+  title: string;
   description: string;
-  goal: string;
-  attachable: boolean;
 };
 
 const TurboNode = (props: NodeProps<TurboNodeData>) => {
   const { data } = props;
+  const logo = useMemo(() => {
+    return <EditorCanvasIconHelper type="Google Drive" />
+  }, [])
   return (
     <>
       <Handle
@@ -39,9 +41,9 @@ const TurboNode = (props: NodeProps<TurboNodeData>) => {
         className="relative max-w-[400px] dark:border-muted-foreground/70"
       >
         <CardHeader className="flex flex-row items-center gap-4">
-          <div>test</div>
+          <div>{logo}</div>
           <div>
-            <CardTitle className="text-md">{data.goal}</CardTitle>
+            <CardTitle className="text-md">{data.title}</CardTitle>
             <CardDescription>
               <p className="text-xs text-muted-foreground/50">
                 <b className="text-muted-foreground/80">ID: </b>

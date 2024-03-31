@@ -93,7 +93,7 @@ export const useFlowStore = create<RFState>((set, get) => ({
     const data = event.dataTransfer.getData("application/reactflow");
 
     //get bounding rect
-    console.log(event);
+    console.log(data);
 
     const target = event.target as HTMLElement;
 
