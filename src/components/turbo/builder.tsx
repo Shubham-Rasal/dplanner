@@ -53,6 +53,9 @@ const TurboBuilder = () => {
   const { nodes, edges, onNodesChange, onEdgesChange, onConnect } =
     useFlowStore(selector, shallow);
 
+  const onDrop = useFlowStore((state) => state.onDrop);
+  const onDragOver = useFlowStore((state) => state.onDragOver);
+
   return (
     <div className="relative h-screen w-full dark:bg-neutral-950  justify-center items-center">
       <ReactFlow
@@ -61,6 +64,8 @@ const TurboBuilder = () => {
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
+        onDrop={onDrop}
+        onDragOver={onDragOver}
         fitView
         nodeTypes={nodeTypes}
         edgeTypes={edgeTypes}
@@ -74,10 +79,10 @@ const TurboBuilder = () => {
         </Controls>
         <svg>
           <defs>
-          <linearGradient id="edge-gradient">
-            <stop offset="0%" stopColor="#ae53ba" />
-            <stop offset="100%" stopColor="#2a8af6" />
-          </linearGradient>
+            <linearGradient id="edge-gradient">
+              <stop offset="0%" stopColor="#ae53ba" />
+              <stop offset="100%" stopColor="#2a8af6" />
+            </linearGradient>
 
             <marker
               id="edge-circle"

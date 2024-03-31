@@ -1,12 +1,12 @@
 "use client";
-import { EditorCanvasTypes, EditorNodeType } from "@/lib/types";
+import { EditorCanvasCardType, EditorCanvasTypes, EditorNodeType } from "@/lib/types";
 // import { useNodeConnections } from "@/providers/connections-provider";
 // import { useEditor } from "@/providers/editor-provider";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import React, { useEffect } from "react";
 import { Separator } from "@/components/ui/separator";
-import {  EditorCanvasDefaultCardTypes } from "@/lib/constant";
+import { EditorCanvasDefaultCardTypes } from "@/lib/constant";
 import {
   Card,
   CardDescription,
@@ -53,6 +53,12 @@ const EditorCanvasSidebar = ({ nodes }: Props) => {
   //   }
   // }, [nodeConnection]);
 
+  const onDragStart = (event: any, nodeType: EditorCanvasCardType["type"]) => {
+    event.dataTransfer.setData("application/reactflow", nodeType);
+    event.dataTransfer.effectAllowed = "move";
+    console.log("start")
+  };
+
   return (
     <aside>
       <Tabs defaultValue="actions" className="h-screen overflow-scroll pb-24">
@@ -73,9 +79,9 @@ const EditorCanvasSidebar = ({ nodes }: Props) => {
                 key={cardKey}
                 draggable
                 className="w-full cursor-grab border-black bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-900"
-                // onDragStart={(event) =>
-                //   onDragStart(event, cardKey as EditorCanvasTypes)
-                // }
+                onDragStart={(event) =>
+                  onDragStart(event, cardKey as EditorCanvasTypes)
+                }
               >
                 <CardHeader className="flex flex-row items-center gap-4 p-4">
                   {/* <EditorCanvasIconHelper type={cardKey as EditorCanvasTypes} /> */}

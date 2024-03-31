@@ -25,7 +25,6 @@ export default function CustomEdge({
     targetPosition,
   });
 
-  console.log("edgePath", edgePath);
 
   return (
     <>

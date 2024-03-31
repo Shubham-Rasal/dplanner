@@ -51,7 +51,7 @@ const TurboNode = (props: NodeProps<TurboNodeData>) => {
             </CardDescription>
           </div>
         </CardHeader>
-        <Badge className="absolute right-2 top-2">{data.type}</Badge>
+        <Badge className="absolute right-2 top-2">{data.type} sdfasd</Badge>
         <div className="absolute left-3 top-4 h-3 w-3 rounded-full bg-green-500">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
         </div>

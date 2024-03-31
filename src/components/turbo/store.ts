@@ -11,12 +11,14 @@ import {
   addEdge,
   Connection,
   OnConnect,
+  getBoundsOfRects,
 } from "reactflow";
 import { create } from "zustand";
 import { TurboNodeData } from "./node";
 import { GoalSchema } from "../update-goal";
 import * as z from "zod";
 import { v4 } from "uuid";
+import { useCallback } from "react";
 
 export interface RFState {
   nodes: Node<TurboNodeData>[];
@@ -24,6 +26,8 @@ export interface RFState {
   onNodesChange: OnNodesChange;
   onEdgesChange: OnEdgesChange;
   onConnect: OnConnect;
+  onDragOver: (event: React.DragEvent<HTMLDivElement>) => void;
+  onDrop: (event: React.DragEvent<HTMLDivElement>) => void;
   updateNode: (nodeId: string, data: z.infer<typeof GoalSchema>) => void;
   createNode: (data: z.infer<typeof GoalSchema>) => void;
 }
@@ -77,8 +81,48 @@ export const useFlowStore = create<RFState>((set, get) => ({
     });
   },
 
-  onConnect: (connection: Connection) => {
+  onDragOver: (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    event.dataTransfer.dropEffect = "move";
+    console.log("over");
+  },
 
+  onDrop: (event: React.DragEvent<HTMLDivElement>) => {
+    console.log("dropped");
+    event.preventDefault();
+    const data = event.dataTransfer.getData("application/reactflow");
+
+    //get bounding rect
+    console.log(event);
+
+    const target = event.target as HTMLElement;
+
+    const boundingRect = target.getBoundingClientRect();
+
+    const position: XYPosition = {
+      x: event.clientX - boundingRect.x,
+      y: event.clientY - boundingRect.y,
+    };
+    const newNode: Node<TurboNodeData> = {
+      id: v4(),
+      position: position,
+      type: "turbo",
+      data: {
+        attachable: true,
+        description: "what is the main goal?",
+        goal: "complete the dsa project.",
+        time: "12:00",
+        date: new Date(),
+        type: "daily",
+      },
+    };
+
+    set({
+      nodes: [...get().nodes, newNode],
+    });
+  },
+
+  onConnect: (connection: Connection) => {
     console.log(connection);
 
     const edge: Edge = {
@@ -88,7 +132,6 @@ export const useFlowStore = create<RFState>((set, get) => ({
       type: "turbo",
       animated: true,
     };
-
 
     set({
       edges: addEdge(edge, get().edges),
@@ -120,6 +163,5 @@ export const useFlowStore = create<RFState>((set, get) => ({
     set({
       edges: get().edges.filter((edge) => edge.id !== edgeId),
     });
-  }
-
+  },
 }));
