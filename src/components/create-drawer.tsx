@@ -20,7 +20,6 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 
-import CreateGoal from "./create-goal";
 import { ControlButton, NodeProps } from "reactflow";
 import { PlusCircleIcon } from "lucide-react";
 
@@ -43,7 +42,7 @@ export function CreateDrawer() {
               Make changes to your goal here. Click save when you&apos;re done.
             </DialogDescription>
           </DialogHeader>
-          <CreateGoal />
+          {/* <CreateGoal /> */}
         </DialogContent>
       </Dialog>
     );
@@ -64,7 +63,7 @@ export function CreateDrawer() {
           </DrawerDescription>
         </DrawerHeader>
         {/* <ProfileForm className="px-4" /> */}
-        <CreateGoal />
+        {/* <CreateGoal /> */}
       </DrawerContent>
     </Drawer>
   );

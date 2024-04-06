@@ -11,50 +11,46 @@ import {
   addEdge,
   Connection,
   OnConnect,
+  getBoundsOfRects,
 } from "reactflow";
 import { create } from "zustand";
-import { TurboNodeData } from "./node";
-import { GoalSchema } from "../update-goal";
 import * as z from "zod";
 import { v4 } from "uuid";
+import { useCallback } from "react";
+import {
+  EditorCanvasCardType,
+  EditorCanvasTypes,
+  EditorNodeType,
+} from "@/lib/types";
+import { EditorCanvasDefaultCardTypes } from "@/lib/constant";
 
 export interface RFState {
-  nodes: Node<TurboNodeData>[];
+  nodes: Node<EditorCanvasCardType>[];
   edges: Edge[];
+  selectedNode: EditorNodeType;
   onNodesChange: OnNodesChange;
   onEdgesChange: OnEdgesChange;
   onConnect: OnConnect;
-  updateNode: (nodeId: string, data: z.infer<typeof GoalSchema>) => void;
-  createNode: (data: z.infer<typeof GoalSchema>) => void;
+  onDragOver: (event: React.DragEvent<HTMLDivElement>) => void;
+  onDrop: (event: React.DragEvent<HTMLDivElement>) => void;
+  createNode: (data: EditorCanvasCardType) => void;
+  setSelectedNode: (node: EditorNodeType) => void;
 }
 
 export const useFlowStore = create<RFState>((set, get) => ({
   nodes: [
     {
       id: "1",
+      type: "Trigger",
       position: { x: 0, y: 0 },
       data: {
-        attachable: true,
-        description: "what is the main goal?",
-        goal: "complete the project",
-        time: "12:00",
-        date: new Date(),
-        type: "daily",
+        completed: false,
+        current: false,
+        description: "This is desc",
+        metadata: {},
+        title: "This is a trigger",
+        type: "Trigger",
       },
-      type: "turbo",
-    },
-    {
-      id: "2",
-      position: { x: 250, y: 0 },
-      data: {
-        attachable: true,
-        description: "what is the main goal?",
-        goal: "complete the dsa project.",
-        time: "12:00",
-        date: new Date(),
-        type: "daily",
-      },
-      type: "turbo",
     },
   ],
 
@@ -66,6 +62,27 @@ export const useFlowStore = create<RFState>((set, get) => ({
       animated: true,
     },
   ],
+
+  selectedNode: {
+    data: {
+      completed: false,
+      current: false,
+      description: "",
+      metadata: {},
+      title: "",
+      type: "Trigger",
+    },
+    id: "",
+    position: { x: 0, y: 0 },
+    type: "Trigger",
+  },
+
+  setSelectedNode: (node: EditorNodeType) => {
+    set({
+      selectedNode: node,
+    });
+  },
+
   onNodesChange: (changes: NodeChange[]) => {
     set({
       nodes: applyNodeChanges(changes, get().nodes),
@@ -77,8 +94,52 @@ export const useFlowStore = create<RFState>((set, get) => ({
     });
   },
 
-  onConnect: (connection: Connection) => {
+  onDragOver: (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    event.dataTransfer.dropEffect = "move";
+    console.log("over");
+  },
 
+  onDrop: (event: React.DragEvent<HTMLDivElement>) => {
+    console.log("dropped");
+    event.preventDefault();
+    const data = event.dataTransfer.getData("application/reactflow");
+
+    //get bounding rect
+    console.log(data);
+
+    const target = event.target as HTMLElement;
+
+    const boundingRect = target.getBoundingClientRect();
+
+    const position: XYPosition = {
+      x: event.clientX - boundingRect.x,
+      y: event.clientY - boundingRect.y,
+    };
+
+    const { type, description } =
+      EditorCanvasDefaultCardTypes[data as EditorCanvasTypes];
+
+    const newNode: EditorNodeType = {
+      id: v4(),
+      position: position,
+      type: "Trigger",
+      data: {
+        completed: false,
+        current: false,
+        description,
+        metadata: {},
+        title: data,
+        type: data as EditorCanvasTypes,
+      },
+    };
+
+    set({
+      nodes: [...get().nodes, newNode],
+    });
+  },
+
+  onConnect: (connection: Connection) => {
     console.log(connection);
 
     const edge: Edge = {
@@ -89,26 +150,35 @@ export const useFlowStore = create<RFState>((set, get) => ({
       animated: true,
     };
 
-
     set({
       edges: addEdge(edge, get().edges),
     });
   },
 
-  updateNode: (nodeId: string, data: z.infer<typeof GoalSchema>) => {
-    const nodes = get().nodes;
-    const node = nodes.find((node) => node.id === nodeId);
-    if (node) {
-      node.data = data;
-      set({ nodes: [...nodes] });
-    }
-  },
-  createNode: (data: z.infer<typeof GoalSchema>) => {
-    const newNode: Node<TurboNodeData> = {
+  // updateNode: (nodeId: string, data: z.infer<typeof GoalSchema>) => {
+  //   const nodes = get().nodes;
+  //   const node = nodes.find((node) => node.id === nodeId);
+  //   if (node) {
+  //     node.data = data;
+  //     set({ nodes: [...nodes] });
+  //   }
+  // },
+  createNode: (data: EditorCanvasCardType) => {
+    const { description } = EditorCanvasDefaultCardTypes[data.type];
+
+    const newNode: EditorNodeType = {
       id: v4(),
       position: { x: 0, y: 0 },
-      data: data,
-      type: "turbo",
+      data: {
+        completed: false,
+        current: false,
+        description,
+        metadata: {},
+        title: data.type,
+        type: data.type,
+      },
+
+      type: data.type,
     };
 
     set({
@@ -120,6 +190,5 @@ export const useFlowStore = create<RFState>((set, get) => ({
     set({
       edges: get().edges.filter((edge) => edge.id !== edgeId),
     });
-  }
-
+  },
 }));

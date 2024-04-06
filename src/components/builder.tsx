@@ -17,7 +17,7 @@ const nodeTypes = {
   custom: CustomNode,
 };
 
-const initialNodes = [
+export const initialNodes = [
   {
     id: "1",
     type: "custom",
@@ -39,7 +39,7 @@ const initialNodes = [
   },
 ];
 
-const initEdges = [
+export const initEdges = [
   {
     id: "e1-2",
     source: "1",
