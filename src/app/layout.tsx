@@ -7,6 +7,7 @@ import { SupabaseUserProvider } from "@/components/providers/user-provider";
 import Background from "@/components/backgroud";
 import { BillingProvider } from "@/providers/billing-provider";
 import ModalProvider from "@/providers/modal-provider";
+import { ViewTransitions } from "next-view-transitions";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,25 +23,27 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <Toaster />
-        <Background />
-        <ThemeProvider
-          defaultTheme="system"
-          enableSystem
-          attribute="class"
-          disableTransitionOnChange
-        >
-          <SupabaseUserProvider>
-            <BillingProvider>
-              <ModalProvider>{children}</ModalProvider>
+    <ViewTransitions>
+      <html lang="en">
+        <body className={inter.className}>
+          <Toaster />
+          <Background />
+          <ThemeProvider
+            defaultTheme="system"
+            enableSystem
+            attribute="class"
+            disableTransitionOnChange
+          >
+            <SupabaseUserProvider>
+              <BillingProvider>
+                <ModalProvider>{children}</ModalProvider>
 
-              <Toaster />
-            </BillingProvider>
-          </SupabaseUserProvider>
-        </ThemeProvider>
-      </body>
-    </html>
+                <Toaster />
+              </BillingProvider>
+            </SupabaseUserProvider>
+          </ThemeProvider>
+        </body>
+      </html>
+    </ViewTransitions>
   );
 }
