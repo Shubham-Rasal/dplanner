@@ -2,7 +2,7 @@
 import { Subscription, User, Workspace } from "@/lib/supabase/database.types";
 import { useToast } from "./ui/use-toast";
 import { AuthUser } from "@supabase/supabase-js";
-import Link from "next/link";
+import { Link } from 'next-view-transitions'
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
