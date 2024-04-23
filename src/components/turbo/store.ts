@@ -35,7 +35,7 @@ export interface RFState {
   onDrop: (event: React.DragEvent<HTMLDivElement>) => void;
   // onTouchEnd: (event: React.TouchEvent<HTMLDivElement>) => void;
   createNode: (data: EditorCanvasCardType) => void;
-  deleteNode: (node: Node) => void;
+  deleteNode: (nodeId: string) => void;
   setSelectedNode: (node: EditorNodeType) => void;
 }
 
@@ -157,9 +157,9 @@ export const useFlowStore = create<RFState>((set, get) => ({
     });
   },
 
-  deleteNode: (node: Node) => {
+  deleteNode: (nodeId: string) => {
     set({
-      nodes: get().nodes.filter((n) => n.id !== node.id),
+      nodes: get().nodes.filter((n) => n.id !== nodeId),
     });
   },
 

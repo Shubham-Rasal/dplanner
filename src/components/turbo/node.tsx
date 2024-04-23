@@ -32,7 +32,7 @@ import {
 
 const TurboNode = (props: NodeProps<EditorCanvasCardType>) => {
   const { data } = props;
-  const { setSelectedNode, nodes, selectedNode } = useFlowStore();
+  const { setSelectedNode, nodes, selectedNode, deleteNode } = useFlowStore();
 
   const logo = useMemo(() => {
     return <EditorCanvasIconHelper type="Google Drive" />;
@@ -45,48 +45,15 @@ const TurboNode = (props: NodeProps<EditorCanvasCardType>) => {
         className="!-bottom-2 !h-4 !w-4 dark:bg-neutral-800 z-10"
       />
       <ContextMenu>
-        <ContextMenuContent className="w-64">
-          <ContextMenuItem inset>
-            Back
-            <ContextMenuShortcut>⌘[</ContextMenuShortcut>
+        <ContextMenuContent>
+          <ContextMenuItem onClick={() => deleteNode(props.id)}>
+            Delete
           </ContextMenuItem>
-          <ContextMenuItem inset disabled>
-            Forward
-            <ContextMenuShortcut>⌘]</ContextMenuShortcut>
-          </ContextMenuItem>
-          <ContextMenuItem inset>
-            Reload
-            <ContextMenuShortcut>⌘R</ContextMenuShortcut>
-          </ContextMenuItem>
-          <ContextMenuSub>
-            <ContextMenuSubTrigger inset>More Tools</ContextMenuSubTrigger>
-            <ContextMenuSubContent className="w-48">
-              <ContextMenuItem>
-                Save Page As...
-                <ContextMenuShortcut>⇧⌘S</ContextMenuShortcut>
-              </ContextMenuItem>
-              <ContextMenuItem>Create Shortcut...</ContextMenuItem>
-              <ContextMenuItem>Name Window...</ContextMenuItem>
-              <ContextMenuSeparator />
-              <ContextMenuItem>Developer Tools</ContextMenuItem>
-            </ContextMenuSubContent>
-          </ContextMenuSub>
-          <ContextMenuSeparator />
-          <ContextMenuCheckboxItem checked>
-            Show Bookmarks Bar
-            <ContextMenuShortcut>⌘⇧B</ContextMenuShortcut>
-          </ContextMenuCheckboxItem>
-          <ContextMenuCheckboxItem>Show Full URLs</ContextMenuCheckboxItem>
-          <ContextMenuSeparator />
-          <ContextMenuRadioGroup value="pedro">
-            <ContextMenuLabel inset>People</ContextMenuLabel>
-            <ContextMenuSeparator />
-            <ContextMenuRadioItem value="pedro">
-              Pedro Duarte
-            </ContextMenuRadioItem>
-            <ContextMenuRadioItem value="colm">Colm Tuite</ContextMenuRadioItem>
-          </ContextMenuRadioGroup>
+          <ContextMenuItem>Billing</ContextMenuItem>
+          <ContextMenuItem>Team</ContextMenuItem>
+          <ContextMenuItem>Subscription</ContextMenuItem>
         </ContextMenuContent>
+
         <ContextMenuTrigger className="flex  items-center justify-center rounded-md border border-dashed text-sm">
           <Card
             onClick={() => {
