@@ -35,11 +35,11 @@ export const ContainerScroll = ({
 
   return (
     <div
-      className="lg:h-[80rem] flex items-center justify-center relative p-10"
+      className="lg:h-[60rem] flex items-center justify-center relative p-10"
       ref={containerRef}
     >
       <div
-        className="py-40 w-full relative"
+        className="py-20 w-full relative"
         style={{
           perspective: '1000px',
         }}
@@ -88,15 +88,15 @@ export const Card = ({
         boxShadow:
           '0 0 #0000004d, 0 9px 20px #0000004a, 0 37px 37px #00000042, 0 84px 50px #00000026, 0 149px 60px #0000000a, 0 233px 65px #00000003',
       }}
-      className="max-w-5xl -mt-12 mx-auto h-fit w-full  p-6 bg-[#222222] rounded-[30px] shadow-2xl"
+      className="max-w-5xl -mt-12 mx-auto h-fit w-full  md:p-2 bg-[#222222] rounded-[30px] shadow-2xl"
     >
-      <div className="bg-gray-100 h-fit w-full rounded-2xl  gap-4 overflow-hidden p-4 transition-all ">
+      <div className="bg-gray-200 h-fit w-full rounded-2xl  gap-4 overflow-hidden md:p-1 transition-all ">
         <Image
           src="/temp-banner.png"
           height={400}
           width={1000}
           alt="bannerImage"
-          className=" w-full object-cover border-8 rounded-2xl"
+          className=" w-full object-cover border-2 rounded-2xl"
         />
       </div>
     </motion.div>

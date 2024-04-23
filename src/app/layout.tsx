@@ -8,6 +8,7 @@ import Background from "@/components/backgroud";
 import { BillingProvider } from "@/providers/billing-provider";
 import ModalProvider from "@/providers/modal-provider";
 import { ViewTransitions } from "next-view-transitions";
+import Footer from "@/components/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 

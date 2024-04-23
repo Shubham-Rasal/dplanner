@@ -1,3 +1,4 @@
+import Features from "@/components/features";
 import { CardBody, CardContainer, CardItem } from "@/components/global/3d-card";
 import { HeroParallax } from "@/components/global/connect-parallax";
 import { ContainerScroll } from "@/components/global/container-scroll-animation";
@@ -8,12 +9,13 @@ import { Navbar } from "@/components/navbar";
 import { Button } from "@/components/ui/button";
 import { clients, products } from "@/lib/constant";
 import { CheckIcon } from "lucide-react";
+import { Link } from "next-view-transitions";
 
 const HomePage = () => {
   return (
     <main className="flex items-center justify-center flex-col">
       <Navbar />
-      <section className=" w-screen h-screen  bg-neutral-950 rounded-md  !overflow-visible relative flex flex-col items-center  antialiased">
+      <section className=" w-screen h-fit  bg-neutral-950 rounded-md  !overflow-visible relative flex flex-col items-center  antialiased">
         <div className="absolute inset-0  h-full w-full items-center px-5 py-24 "></div>
         <div className="flex flex-col mt-[-100px] md:mt-[-50px]">
           <ContainerScroll
@@ -28,26 +30,33 @@ const HomePage = () => {
         </div>
       </section>
 
-      <InfiniteMovingCards
+      {/* <InfiniteMovingCards
         className="md:mt-[32rem] mt-[-100px] w-screen"
         items={clients}
         direction="right"
         speed="normal"
-      />
-      <Button
-        size={"lg"}
-        className="p-8 my-8 md:mb-0 text-2xl w-full sm:w-fit border-t-2 rounded-full border-[#4D4D4D] bg-[#1F1F1F] hover:bg-white group transition-all flex items-center justify-center gap-4 hover:shadow-xl hover:shadow-neutral-500 duration-500"
+      /> */}
+
+      <Link
+        href="/dashboard"
+        className="relative inline-flex h-20 overflow-hidden rounded-full p-[2px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
       >
-        <span className="bg-clip-text text-transparent bg-gradient-to-r from-neutral-500 to-neutral-600  md:text-center font-sans group-hover:bg-gradient-to-r group-hover:from-black goup-hover:to-black">
-          Start For Free Today
+        <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
+        <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-3 py-1 text-lg  font-medium text-white backdrop-blur-3xl">
+          Go to playground
         </span>
-      </Button>
-      <section className="w-screen">
+      </Link>
+      <section className="w-screen h-screen">
         <HeroParallax products={products}></HeroParallax>
       </section>
+
+      <section className="w-screen">
+        <Features />
+      </section>
+
       <section className="mt-[5rem] w-screen">
         <LampComponent />
-        <div className="flex flex-wrap items-center px-2 justify-center flex-col md:flex-row gap-8 -mt-72">
+        <div className="flex flex-wrap items-center px-2 justify-center flex-col md:flex-row gap-8 my-72">
           <CardContainer className="inter-var ">
             <CardBody className="bg-gray-50 relative group/card  dark:hover:shadow-2xl dark:hover:shadow-neutral-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-full md:!w-[350px] h-auto rounded-xl p-6 border">
               <CardItem

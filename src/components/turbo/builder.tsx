@@ -49,11 +49,12 @@ const defaultEdgeOptions = {
 };
 
 const TurboBuilder = () => {
-  const { nodes, edges, onNodesChange, onEdgesChange, onConnect } =
+  const { nodes, edges, onNodesChange, onEdgesChange, onConnect} =
     useFlowStore(selector, shallow);
 
   const onDrop = useFlowStore((state) => state.onDrop);
   const onDragOver = useFlowStore((state) => state.onDragOver);
+  const onDeleteNode = useFlowStore((state) => state.deleteNode);
 
   return (
     <div className="relative h-screen w-full dark:bg-neutral-950  justify-center items-center">
@@ -65,8 +66,11 @@ const TurboBuilder = () => {
         onConnect={onConnect}
         onDrop={onDrop}
         onDragOver={onDragOver}
+        // onNodesDelete={onDeleteNode}
+        // onPaneClick={onPaneClick}
+        // onNodeContextMenu={onNodeContextMenu}
         fitView
-        snapToGrid
+        // snapToGrid
         nodeTypes={nodeTypes}
         edgeTypes={edgeTypes}
         defaultEdgeOptions={defaultEdgeOptions}
@@ -103,6 +107,7 @@ const TurboBuilder = () => {
           className="bg-transparent"
           variant={BackgroundVariant.Dots}
         />
+        <Controls />
       </ReactFlow>
     </div>
   );
