@@ -57,7 +57,7 @@ const TurboBuilder = () => {
   const onDeleteNode = useFlowStore((state) => state.deleteNode);
 
   return (
-    <div className="relative h-screen w-full dark:bg-neutral-950  justify-center items-center">
+    <div className="relative h-screen w-screen dark:bg-neutral-950  justify-center items-center">
       <ReactFlow
         nodes={nodes}
         edges={edges}
@@ -66,10 +66,11 @@ const TurboBuilder = () => {
         onConnect={onConnect}
         onDrop={onDrop}
         onDragOver={onDragOver}
+        
         // onNodesDelete={onDeleteNode}
         // onPaneClick={onPaneClick}
         // onNodeContextMenu={onNodeContextMenu}
-        fitView
+        // fitView
         // snapToGrid
         nodeTypes={nodeTypes}
         edgeTypes={edgeTypes}

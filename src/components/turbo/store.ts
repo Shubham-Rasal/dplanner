@@ -44,13 +44,13 @@ export const useFlowStore = create<RFState>((set, get) => ({
     {
       id: "1",
       type: "Trigger",
-      position: { x: 0, y: 0 },
+      position: { x: 1000, y: 0 },
       data: {
         completed: false,
         current: false,
         description: "This is desc",
         metadata: {},
-        title: "This is a trigger",
+        title: "This is a title",
         type: "Trigger",
       },
     },
@@ -74,8 +74,8 @@ export const useFlowStore = create<RFState>((set, get) => ({
       title: "",
       type: "Trigger",
     },
-    id: "",
-    position: { x: 0, y: 0 },
+    id: "21jkd34rj-dj34",
+    position: { x: 1000, y: 0 },
     type: "Trigger",
   },
 

@@ -1,11 +1,12 @@
 import React, { memo, ReactNode, useMemo } from "react";
 import { Handle, NodeProps, Position } from "reactflow";
 import { LockClosedIcon, LockOpen2Icon } from "@radix-ui/react-icons";
-import { Badge, CheckCircle } from "lucide-react";
+import { CheckCircle } from "lucide-react";
 import { Card, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import clsx from "clsx";
 import EditorCanvasIconHelper from "@/app/(main)/workflows/_components/editor-canvas-card-icon-hepler";
 import { useFlowStore } from "./store";
+import { Badge } from "@/components/ui/badge";
 import { EditorCanvasCardType, EditorNodeType } from "@/lib/types";
 import {
   ContextMenu,
@@ -63,9 +64,9 @@ const TurboNode = (props: NodeProps<EditorCanvasCardType>) => {
             }}
             className={`relative max-w-[400px] dark:border-muted-foreground/70`}
           >
-            <CardHeader className="flex flex-row items-center gap-4">
+            <CardHeader className="flex flex-row items-end gap-4">
               <div>{logo}</div>
-              <div>
+              <div className="flex flex-col gap-2 w-full">
                 <CardTitle className="text-md">{data.title}</CardTitle>
                 <CardDescription>
                   <p className="text-xs text-muted-foreground/50">
@@ -76,9 +77,7 @@ const TurboNode = (props: NodeProps<EditorCanvasCardType>) => {
                 </CardDescription>
               </div>
             </CardHeader>
-            <Badge className="absolute right-2 top-2">
-              {data.type} sdfjsdlkfjsldkjf
-            </Badge>
+            <Badge className="absolute top-2 right-2">{data.type}</Badge>
             <div className="absolute left-3 top-4 h-3 w-3 rounded-full bg-green-500">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
             </div>
