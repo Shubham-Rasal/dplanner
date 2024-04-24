@@ -1,5 +1,5 @@
 "use client";
-import Link from "next/link";
+import { Link } from 'next-view-transitions'
 import { usePathname } from "next/navigation";
 import React from "react";
 import {
@@ -20,7 +20,7 @@ const MenuOptions = (props: Props) => {
   const pathName = usePathname();
 
   return (
-    <nav className="overflow-hidden dark:bg-black max-h-screen overflow-scroll  justify-between flex items-center flex-col  gap-10 py-6 px-2">
+    <nav className=" dark:bg-black max-h-screen overflow-scroll  justify-between flex items-center flex-col  gap-10 py-6 px-2">
       <div className="flex items-center justify-center flex-col gap-8">
         <Link className="flex font-bold flex-row  text-sm" href="/">
           ff.

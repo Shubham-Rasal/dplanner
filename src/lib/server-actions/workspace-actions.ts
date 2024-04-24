@@ -35,15 +35,6 @@ export const getUserWorkspaces = async (userId: string) => {
   }
 };
 
-//get all collaborators
-export const getAllCollaborators = async () => {
-  try {
-    const data = await db.query.collaborators.findMany();
-    return { data: data, error: null };
-  } catch (error) {
-    return { data: [], error: error };
-  }
-};
 
 export const getUserSubscriptionStatus = async (userId: string) => {
   try {

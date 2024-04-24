@@ -44,7 +44,7 @@ type Props = {
 
 const EditorCanvasSidebar = ({ nodes }: Props) => {
   const { selectedNode } = useFlowStore();
-  console.log(selectedNode);
+  // console.log(selectedNode);
   // const { nodeConnection } = useNodeConnections();
   // const { googleFile, setSlackChannels } = useFuzzieStore();
   // useEffect(() => {

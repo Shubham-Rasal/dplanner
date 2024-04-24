@@ -33,7 +33,9 @@ export interface RFState {
   onConnect: OnConnect;
   onDragOver: (event: React.DragEvent<HTMLDivElement>) => void;
   onDrop: (event: React.DragEvent<HTMLDivElement>) => void;
+  // onTouchEnd: (event: React.TouchEvent<HTMLDivElement>) => void;
   createNode: (data: EditorCanvasCardType) => void;
+  deleteNode: (nodeId: string) => void;
   setSelectedNode: (node: EditorNodeType) => void;
 }
 
@@ -42,13 +44,13 @@ export const useFlowStore = create<RFState>((set, get) => ({
     {
       id: "1",
       type: "Trigger",
-      position: { x: 0, y: 0 },
+      position: { x: 1000, y: 0 },
       data: {
         completed: false,
         current: false,
         description: "This is desc",
         metadata: {},
-        title: "This is a trigger",
+        title: "This is a title",
         type: "Trigger",
       },
     },
@@ -72,8 +74,8 @@ export const useFlowStore = create<RFState>((set, get) => ({
       title: "",
       type: "Trigger",
     },
-    id: "",
-    position: { x: 0, y: 0 },
+    id: "21jkd34rj-dj34",
+    position: { x: 1000, y: 0 },
     type: "Trigger",
   },
 
@@ -155,14 +157,13 @@ export const useFlowStore = create<RFState>((set, get) => ({
     });
   },
 
-  // updateNode: (nodeId: string, data: z.infer<typeof GoalSchema>) => {
-  //   const nodes = get().nodes;
-  //   const node = nodes.find((node) => node.id === nodeId);
-  //   if (node) {
-  //     node.data = data;
-  //     set({ nodes: [...nodes] });
-  //   }
-  // },
+  deleteNode: (nodeId: string) => {
+    set({
+      nodes: get().nodes.filter((n) => n.id !== nodeId),
+    });
+  },
+
+  
   createNode: (data: EditorCanvasCardType) => {
     const { description } = EditorCanvasDefaultCardTypes[data.type];
 

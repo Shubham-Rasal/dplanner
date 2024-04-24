@@ -22,7 +22,7 @@ import { SignUpAction } from "@/lib/server-actions/auth-actions";
 import { useRouter } from "next/navigation";
 import { useSupabaseUser } from "./providers/user-provider";
 import { ArrowBigRight, ArrowRight, ArrowRightCircleIcon } from "lucide-react";
-import Link from "next/link";
+import { Link } from 'next-view-transitions'
 
 const FormSchema = z.object({
   email: z.string().email({

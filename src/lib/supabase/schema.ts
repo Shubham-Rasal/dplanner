@@ -45,26 +45,6 @@ export const folders = pgTable("folders", {
     .references(() => workspaces.id, { onDelete: "cascade" }),
 });
 
-export const files = pgTable("files", {
-  id: uuid("id").defaultRandom().primaryKey().notNull(),
-  createdAt: timestamp("created_at", {
-    withTimezone: true,
-    mode: "string",
-  }),
-  workspaceOwner: uuid("workspace_owner").notNull(),
-  title: text("title").notNull(),
-  iconId: uuid("icon_id").notNull(),
-  data: text("data"),
-  inTrash: text("in_trash"),
-  logo: text("logo"),
-  bannerUrl: text("banner_url"),
-  workspaceId: uuid("workspace_id")
-    .notNull()
-    .references(() => workspaces.id, { onDelete: "cascade" }),
-  folderId: uuid("folder_id")
-    .notNull()
-    .references(() => folders.id, { onDelete: "cascade" }),
-});
 
 export const customers = pgTable("customers", {
 	id: uuid("id").primaryKey().notNull(),
@@ -121,23 +101,5 @@ export const users = pgTable("users", {
 	paymentMethod: jsonb("payment_method"),
 	email: text("email"),
 	updatedAt: timestamp("updated_at", { withTimezone: true, mode: 'string' }),
-});
-
-export const todos = pgTable("todos", {
-	id: uuid("id").defaultRandom().primaryKey().notNull(),
-	createdAt: timestamp("created_at", { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
-	title: text("title"),
-	isComplete: boolean("is_complete").default(false),
-	userId: uuid("user_id").default(sql`auth.uid()`),
-});
-
-export const collaborators = pgTable("collaborators", {
-  id: uuid("id").defaultRandom().primaryKey().notNull(),
-  createdAt: timestamp("created_at", {
-    withTimezone: true,
-    mode: "string",
-  }),
-  workspaceId: uuid("workspace_id").references(() => workspaces.id, { onDelete: "cascade" }),
-  userId: uuid("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
 });
 
