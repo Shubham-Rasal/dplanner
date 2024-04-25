@@ -105,10 +105,14 @@ export const useFlowStore = create<RFState>((set, get) => ({
   onDrop: (event: React.DragEvent<HTMLDivElement>) => {
     console.log("dropped");
     event.preventDefault();
-    const data = event.dataTransfer.getData("application/reactflow");
+    const data = event.dataTransfer.getData("application/json");
 
     //get bounding rect
-    console.log(data);
+    console.log(JSON.parse(data));
+
+    const { nodeType, cardValue} = JSON.parse(data);
+
+    //type cardVAlue to EditorCanvasCardType
 
     const target = event.target as HTMLElement;
 
@@ -120,19 +124,19 @@ export const useFlowStore = create<RFState>((set, get) => ({
     };
 
     const { type, description } =
-      EditorCanvasDefaultCardTypes[data as EditorCanvasTypes];
+      EditorCanvasDefaultCardTypes[nodeType as EditorCanvasTypes];
 
     const newNode: EditorNodeType = {
       id: v4(),
       position: position,
-      type: "Trigger",
+      type: "TurboNode", 
       data: {
         completed: false,
         current: false,
-        description,
+        description: cardValue.description,
         metadata: {},
-        title: data,
-        type: data as EditorCanvasTypes,
+        title: cardValue.title,
+        type: cardValue.type as EditorCanvasTypes,
       },
     };
 
@@ -163,7 +167,6 @@ export const useFlowStore = create<RFState>((set, get) => ({
     });
   },
 
-  
   createNode: (data: EditorCanvasCardType) => {
     const { description } = EditorCanvasDefaultCardTypes[data.type];
 

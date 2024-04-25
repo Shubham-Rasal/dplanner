@@ -44,28 +44,20 @@ type Props = {
 
 const EditorCanvasSidebar = ({ nodes }: Props) => {
   const { selectedNode } = useFlowStore();
-  // console.log(selectedNode);
-  // const { nodeConnection } = useNodeConnections();
-  // const { googleFile, setSlackChannels } = useFuzzieStore();
-  // useEffect(() => {
-  //   if (state) {
-  //     onConnections(nodeConnection, state, googleFile);
-  //   }
-  // }, [state]);
 
-  // useEffect(() => {
-  //   if (nodeConnection.slackNode.slackAccessToken) {
-  //     fetchBotSlackChannels(
-  //       nodeConnection.slackNode.slackAccessToken,
-  //       setSlackChannels
-  //     );
-  //   }
-  // }, [nodeConnection]);
-
-  const onDragStart = (event: any, nodeType: EditorCanvasCardType["type"]) => {
-    event.dataTransfer.setData("application/reactflow", nodeType);
+  const onDragStart = (
+    event: any,
+    nodeType: EditorCanvasCardType["type"],
+    cardValue: EditorCanvasCardType
+  ) => {
+    //set the data type and value to be dragged
+    event.dataTransfer.setData(
+      "application/json",
+      JSON.stringify({ nodeType, cardValue })
+    );
     event.dataTransfer.effectAllowed = "move";
-    console.log(nodeType);
+
+    console.log(event.dataTransfer.getData("application/json"));
   };
 
   return (
@@ -92,7 +84,11 @@ const EditorCanvasSidebar = ({ nodes }: Props) => {
                 draggable
                 className="w-full cursor-grab border-black bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-900"
                 onDragStart={(event) =>
-                  onDragStart(event, cardKey as EditorCanvasTypes)
+                  onDragStart(
+                    event,
+                    cardKey as EditorCanvasTypes,
+                    cardValue as EditorCanvasCardType
+                  )
                 }
               >
                 <CardHeader className="flex flex-row items-center gap-4 p-4">
@@ -109,11 +105,11 @@ const EditorCanvasSidebar = ({ nodes }: Props) => {
           <div className="px-2 py-4 text-center text-xl font-bold">
             {selectedNode.data.title}
           </div>
-         <div className="">Input</div>
-         <div className="">Actions</div>
-         <div className="">Output</div>
-         <button>Delete</button>
-         <button>Save</button>
+          <div className="">Input</div>
+          <div className="">Actions</div>
+          <div className="">Output</div>
+          <button>Delete</button>
+          <button>Save</button>
         </TabsContent>
       </Tabs>
     </aside>

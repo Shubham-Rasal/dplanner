@@ -36,7 +36,7 @@ import TurboNode from "./node";
 import TurboEdge from "./edge";
 
 const nodeTypes = {
-  Trigger: TurboNode,
+  TurboNode,
 };
 
 const edgeTypes = {
@@ -49,7 +49,7 @@ const defaultEdgeOptions = {
 };
 
 const TurboBuilder = () => {
-  const { nodes, edges, onNodesChange, onEdgesChange, onConnect} =
+  const { nodes, edges, onNodesChange, onEdgesChange, onConnect } =
     useFlowStore(selector, shallow);
 
   const onDrop = useFlowStore((state) => state.onDrop);
@@ -66,7 +66,6 @@ const TurboBuilder = () => {
         onConnect={onConnect}
         onDrop={onDrop}
         onDragOver={onDragOver}
-        
         // onNodesDelete={onDeleteNode}
         // onPaneClick={onPaneClick}
         // onNodeContextMenu={onNodeContextMenu}

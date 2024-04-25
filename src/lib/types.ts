@@ -1,16 +1,16 @@
 import * as z from "zod";
 
 export const EditUserProfileSchema = z.object({
-  email: z.string().email('Required'),
-  name: z.string().min(1, 'Required'),
-})
+  email: z.string().email("Required"),
+  name: z.string().min(1, "Required"),
+});
 
 export const WorkflowFormSchema = z.object({
-  name: z.string().min(1, 'Required'),
-  description: z.string().min(1, 'Required'),
-})
+  name: z.string().min(1, "Required"),
+  description: z.string().min(1, "Required"),
+});
 
-export type ConnectionTypes = 'Google Drive' | 'Notion' | 'Slack' | 'Discord'
+export type ConnectionTypes = "Google Drive" | "Notion" | "Slack" | "Discord";
 
 // export type Connection = {
 //   title: ConnectionTypes
@@ -23,73 +23,73 @@ export type ConnectionTypes = 'Google Drive' | 'Notion' | 'Slack' | 'Discord'
 // }
 
 export type EditorCanvasTypes =
-  | 'Email'
-  | 'Condition'
-  | 'AI'
-  | 'Slack'
-  | 'Google Drive'
-  | 'Notion'
-  | 'Custom Webhook'
-  | 'Google Calendar'
-  | 'Trigger'
-  | 'Action'
-  | 'Wait'
+  | "Email"
+  | "Condition"
+  | "AI"
+  | "Slack"
+  | "Google Drive"
+  | "Notion"
+  | "Custom Webhook"
+  | "Google Calendar"
+  | "Trigger"
+  | "Action"
+  | "Twitter"
+  | "Wait";
 
 export type EditorCanvasCardType = {
-  title: string
-  description: string
-  completed: boolean
-  current: boolean
-  metadata: any
-  type: EditorCanvasTypes
-}
+  title: string;
+  description: string;
+  completed: boolean;
+  current: boolean;
+  metadata: any;
+  type: EditorCanvasTypes;
+};
 
 export type EditorNodeType = {
-  id: string
-  type: EditorCanvasCardType['type']
+  id: string;
+  type: string;
   position: {
-    x: number
-    y: number
-  }
-  data: EditorCanvasCardType
-}
+    x: number;
+    y: number;
+  };
+  data: EditorCanvasCardType;
+};
 
-export type EditorNode = EditorNodeType
+export type EditorNode = EditorNodeType;
 
 export type EditorActions =
   | {
-      type: 'LOAD_DATA'
+      type: "LOAD_DATA";
       payload: {
-        elements: EditorNode[]
+        elements: EditorNode[];
         edges: {
-          id: string
-          source: string
-          target: string
-        }[]
-      }
+          id: string;
+          source: string;
+          target: string;
+        }[];
+      };
     }
   | {
-      type: 'UPDATE_NODE'
+      type: "UPDATE_NODE";
       payload: {
-        elements: EditorNode[]
-      }
+        elements: EditorNode[];
+      };
     }
-  | { type: 'REDO' }
-  | { type: 'UNDO' }
+  | { type: "REDO" }
+  | { type: "UNDO" }
   | {
-      type: 'SELECTED_ELEMENT'
+      type: "SELECTED_ELEMENT";
       payload: {
-        element: EditorNode
-      }
-    }
+        element: EditorNode;
+      };
+    };
 
 export const nodeMapper: Record<string, string> = {
-  Notion: 'notionNode',
-  Slack: 'slackNode',
-  Discord: 'discordNode',
-  'Google Drive': 'googleNode',
-}
-
+  Notion: "notionNode",
+  Slack: "slackNode",
+  Discord: "discordNode",
+  "Google Drive": "googleNode",
+};
 
 export const loginSchema = z.object({
   email: z.string().email(),
@@ -113,7 +113,6 @@ export const registerSchema = z
     message: "Passwords must match",
     path: ["passwordConfirm"],
   });
-
 
 export const createWorkspaceSchema = z.object({
   name: z.string().min(3).max(80),
