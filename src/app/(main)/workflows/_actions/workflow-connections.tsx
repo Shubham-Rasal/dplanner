@@ -154,6 +154,7 @@ export const onGetWorkflows = async () => {
       description:
         "Bot that checks your github and leetcode contributions, if you don't meet your daily goal, it tweets about it.",
       id: "1",
+      apps: ["Github", "Leetcode", "Twitter"],
       publish: true,
     },
   ];
