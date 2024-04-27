@@ -1,7 +1,5 @@
 "use client";
-import {
-  EditorCanvasCardType,
-} from "@/lib/types";
+import { EditorCanvasCardType } from "@/lib/types";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
@@ -17,23 +15,8 @@ type Props = {
   nodes: Node<EditorCanvasCardType>[];
 };
 
-const EditorCanvasSidebar = ({ nodes }: Props) => {
+const EditorCanvasSidebar = () => {
   const { selectedNode } = useFlowStore();
-
-  const onDragStart = (
-    event: any,
-    nodeType: EditorCanvasCardType["type"],
-    cardValue: EditorCanvasCardType
-  ) => {
-    //set the data type and value to be dragged
-    event.dataTransfer.setData(
-      "application/json",
-      JSON.stringify({ nodeType, cardValue })
-    );
-    event.dataTransfer.effectAllowed = "move";
-
-    console.log(event.dataTransfer.getData("application/json"));
-  };
 
   return (
     <aside>

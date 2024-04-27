@@ -23,7 +23,7 @@ export function Canvas() {
       <ResizableHandle withHandle />
       <ResizablePanel defaultSize={30}>
         <div className="flex h-full items-center justify-center p-6">
-          <EditorCanvasSidebar nodes={nodes} />
+          <EditorCanvasSidebar />
         </div>
       </ResizablePanel>
     </ResizablePanelGroup>
