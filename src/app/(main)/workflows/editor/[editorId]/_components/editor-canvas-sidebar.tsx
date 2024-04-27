@@ -24,7 +24,7 @@ const EditorCanvasSidebar = () => {
           <TabsTrigger value="apps">Apps</TabsTrigger>
         </TabsList>
         <Separator />
-        <TabsContent value="actions" className="flex flex-col gap-4 p-4">
+        <TabsContent value="apps" className="flex flex-col gap-4 p-4">
           test
         </TabsContent>
         <TabsContent value="settings" className="-mt-6">

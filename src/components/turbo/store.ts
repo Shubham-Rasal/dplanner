@@ -37,17 +37,27 @@ export const useFlowStore = create<RFState>((set, get) => ({
     {
       id: "1",
       type: "TurboNode",
-      position: { x: 200, y: 300 },
+      position: { x: 500, y: 300 },
       data: {
         description: "This is desc",
         title: "This is a title",
-        type: "Twitter",
+        type: "Github",
       },
     },
     {
       id: "2",
       type: "TurboNode",
-      position: { x: 300, y: 300 },
+      position: { x: 90, y: 300 },
+      data: {
+        description: "This is desc",
+        title: "This is a title",
+        type: "Leetcode",
+      },
+    },
+    {
+      id: "3",
+      type: "TurboNode",
+      position: { x: 260, y: 600 },
       data: {
         description: "This is desc",
         title: "This is a title",
@@ -58,9 +68,15 @@ export const useFlowStore = create<RFState>((set, get) => ({
 
   edges: [
     {
-      id: "e1-2",
+      id: "e1-3",
       source: "1",
-      target: "2",
+      target: "3",
+      animated: true,
+    },
+    {
+      id: "e1-2",
+      source: "2",
+      target: "3",
       animated: true,
     },
   ],

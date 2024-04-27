@@ -31,7 +31,7 @@ import {
 
 const TurboNode = (props: NodeProps) => {
   const { data } = props;
-  console.log(data);
+  console.log(props);
   const { nodes, deleteNode } = useFlowStore();
 
   const logo = useMemo(() => {
