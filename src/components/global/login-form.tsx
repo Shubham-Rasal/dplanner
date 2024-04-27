@@ -3,8 +3,8 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "./ui/label";
-import { Icons } from "./icons";
+import { Label } from "../ui/label";
+import { Icons } from "../icons";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { loginSchema } from "@/lib/types";
@@ -16,8 +16,8 @@ import {
   FormField,
   FormItem,
   FormMessage,
-} from "./ui/form";
-import { toast } from "./ui/use-toast";
+} from "../ui/form";
+import { toast } from "../ui/use-toast";
 import {
   LoginAction,
   signInWithGithubAction,

@@ -1,5 +1,5 @@
 "use client";
-import { Builder } from "@/components/builder";
+// import { Builder } from "@/components/turbo/builder";
 import TurboBuilder from "@/components/turbo/builder";
 import {
   ResizableHandle,
@@ -18,7 +18,7 @@ export function Canvas() {
       className="min-h-[200px] rounded-lg border"
     >
       <ResizablePanel defaultSize={70}>
-        <Builder />
+        <TurboBuilder />
       </ResizablePanel>
       <ResizableHandle withHandle />
       <ResizablePanel defaultSize={30}>

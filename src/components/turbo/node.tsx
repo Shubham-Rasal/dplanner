@@ -1,10 +1,9 @@
 import React, { memo, ReactNode, useMemo } from "react";
 import { Handle, NodeProps, Position } from "reactflow";
 import { LockClosedIcon, LockOpen2Icon } from "@radix-ui/react-icons";
-import { CheckCircle } from "lucide-react";
+import { CheckCircle, TwitterIcon } from "lucide-react";
 import { Card, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import clsx from "clsx";
-import EditorCanvasIconHelper from "@/app/(main)/workflows/_components/editor-canvas-card-icon-hepler";
 import { useFlowStore } from "./store";
 import { Badge } from "@/components/ui/badge";
 import { EditorCanvasCardType, EditorNodeType } from "@/lib/types";
@@ -33,10 +32,11 @@ import {
 
 const TurboNode = (props: NodeProps<EditorCanvasCardType>) => {
   const { data } = props;
+  console.log(data);
   const { setSelectedNode, nodes, selectedNode, deleteNode } = useFlowStore();
 
   const logo = useMemo(() => {
-    return <EditorCanvasIconHelper type="Google Drive" />;
+    return <TwitterIcon />;
   }, []);
   return (
     <>
@@ -71,7 +71,10 @@ const TurboNode = (props: NodeProps<EditorCanvasCardType>) => {
                 <CardDescription>
                   <p className="text-xs text-muted-foreground/50">
                     <b className="text-muted-foreground/80">ID: </b>
-                    {props.id}
+                    {
+                      //reduce the id to 123...456
+                      props.id.slice(0, 3) + "..." + props.id.slice(-3)
+                    }
                   </p>
                   <p>{data.description}</p>
                 </CardDescription>

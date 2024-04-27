@@ -22,7 +22,7 @@ import {
   EditorCanvasTypes,
   EditorNodeType,
 } from "@/lib/types";
-import { EditorCanvasDefaultCardTypes } from "@/lib/constant";
+import { EditorCanvasDefaultCards } from "@/lib/constant";
 
 export interface RFState {
   nodes: Node<EditorCanvasCardType>[];
@@ -42,16 +42,13 @@ export interface RFState {
 export const useFlowStore = create<RFState>((set, get) => ({
   nodes: [
     {
-      id: "1",
-      type: "Trigger",
-      position: { x: 1000, y: 0 },
+      id: "13o4ijf034jforefij3409uj",
+      type: "TurboNode",
+      position: { x: 200, y: 300 },
       data: {
-        completed: false,
-        current: false,
         description: "This is desc",
-        metadata: {},
         title: "This is a title",
-        type: "Trigger",
+        type: "Twitter",
       },
     },
   ],
@@ -72,7 +69,7 @@ export const useFlowStore = create<RFState>((set, get) => ({
       description: "",
       metadata: {},
       title: "",
-      type: "Trigger",
+      type: "Twitter",
     },
     id: "21jkd34rj-dj34",
     position: { x: 1000, y: 0 },
@@ -111,7 +108,7 @@ export const useFlowStore = create<RFState>((set, get) => ({
     console.log(JSON.parse(data));
 
     const { nodeType, cardValue} = JSON.parse(data);
-
+    console.log(cardValue, nodeType)
     //type cardVAlue to EditorCanvasCardType
 
     const target = event.target as HTMLElement;
@@ -123,19 +120,13 @@ export const useFlowStore = create<RFState>((set, get) => ({
       y: event.clientY - boundingRect.y,
     };
 
-    const { type, description } =
-      EditorCanvasDefaultCardTypes[nodeType as EditorCanvasTypes];
-
     const newNode: EditorNodeType = {
       id: v4(),
       position: position,
-      type: "TurboNode", 
+      type: "TurboNode",
       data: {
-        completed: false,
-        current: false,
         description: cardValue.description,
-        metadata: {},
-        title: cardValue.title,
+        title: nodeType,
         type: cardValue.type as EditorCanvasTypes,
       },
     };
@@ -168,21 +159,18 @@ export const useFlowStore = create<RFState>((set, get) => ({
   },
 
   createNode: (data: EditorCanvasCardType) => {
-    const { description } = EditorCanvasDefaultCardTypes[data.type];
+    const { description } = EditorCanvasDefaultCards[data.type];
 
     const newNode: EditorNodeType = {
       id: v4(),
       position: { x: 0, y: 0 },
       data: {
-        completed: false,
-        current: false,
         description,
-        metadata: {},
-        title: data.type,
+        title: data.title,
         type: data.type,
       },
 
-      type: data.type,
+      type: "TurboNode",
     };
 
     set({

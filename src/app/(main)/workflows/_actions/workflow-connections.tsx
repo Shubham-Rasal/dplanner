@@ -150,26 +150,9 @@ export const onGetWorkflows = async () => {
 
   return [
     {
-      name: "test",
-      description: "test",
-      id: "1",
-      publish: true,
-    },
-    {
-      name: "test",
-      description: "test",
-      id: "1",
-      publish: true,
-    },
-    {
-      name: "test",
-      description: "test",
-      id: "1",
-      publish: true,
-    },
-    {
-      name: "test",
-      description: "test",
+      name: "Twitter Accountability Bot",
+      description:
+        "Bot that checks your github and leetcode contributions, if you don't meet your daily goal, it tweets about it.",
       id: "1",
       publish: true,
     },
@@ -177,7 +160,7 @@ export const onGetWorkflows = async () => {
 };
 
 export const onCreateWorkflow = async (name: string, description: string) => {
-  const user = await getCurrentUserAction()
+  const user = await getCurrentUserAction();
 
   // if (user) {
   //   //create new workflow
@@ -190,9 +173,9 @@ export const onCreateWorkflow = async (name: string, description: string) => {
   //   })
 
   //   if (workflow) return { message: 'workflow created' }
-    return { message: 'Oops! try again' }
+  return { message: "Oops! try again" };
   // }
-}
+};
 
 // export const onGetNodesEdges = async (flowId: string) => {
 //   const nodesEdges = await db.workflows.findUnique({

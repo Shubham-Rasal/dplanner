@@ -22,26 +22,11 @@ export type ConnectionTypes = "Google Drive" | "Notion" | "Slack" | "Discord";
 //   slackSpecial?: boolean
 // }
 
-export type EditorCanvasTypes =
-  | "Email"
-  | "Condition"
-  | "AI"
-  | "Slack"
-  | "Google Drive"
-  | "Notion"
-  | "Custom Webhook"
-  | "Google Calendar"
-  | "Trigger"
-  | "Action"
-  | "Twitter"
-  | "Wait";
+export type EditorCanvasTypes = "Twitter";
 
 export type EditorCanvasCardType = {
   title: string;
   description: string;
-  completed: boolean;
-  current: boolean;
-  metadata: any;
   type: EditorCanvasTypes;
 };
 

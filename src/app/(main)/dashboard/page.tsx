@@ -1,6 +1,11 @@
 "use client";
 import React, { useCallback, useEffect, useState } from "react";
-
+import {
+  Content,
+  availableSchedule,
+  formatTime,
+  tableHeadings,
+} from "@/lib/utils/tweets";
 import Image from "next/image";
 
 const DashboardPage = () => {
@@ -35,6 +40,26 @@ const DashboardPage = () => {
     const code = params.get("code");
     sendAuthRequest(code);
   }, [sendAuthRequest]);
+
+  const [yourSchedule, updateYourSchedule] = useState(availableSchedule);
+
+  //👇🏻 add scheduled post
+  const handleAddPost = (id: number, time: number) => {
+    console.log({ id, time });
+  };
+
+  //👇🏻 delete scheduled post
+  const handleDeletePost = (
+    e: React.MouseEvent<HTMLParagraphElement>,
+    content: Content,
+    time: number
+  ) => {
+    e.stopPropagation();
+    if (content.day !== undefined) {
+      console.log({ time, content });
+    }
+  };
+
   return (
     <div className="border-l-[1px] border-t-[1px] pb-20 h-screen rounded-l-3xl border-muted-foreground/20 overflow-scroll ">
       <div className="flex flex-col gap-4 relative">
@@ -48,6 +73,59 @@ const DashboardPage = () => {
             alt="Card 01"
           /> */}
         </h1>
+      </div>
+      <div className=" p-8">
+        <div className="h-[80vh] w-full overflow-y-scroll">
+          <table className="w-full border-collapse">
+            <thead>
+              <tr>
+                {tableHeadings.map((day, index) => (
+                  <th
+                    key={index}
+                    className="bg-slate-700 p-4 text-lg font-bold"
+                  >
+                    {day}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {yourSchedule.map((item, index) => (
+                <tr key={index}>
+                  <td className="bg-slate-700 text-lg font-bold">
+                    {formatTime(item.time)}
+                  </td>
+                  {item.schedule.map((sch, id) => (
+                    <td
+                      key={id}
+                      onClick={() => handleAddPost(id, item.time)}
+                      className="cursor-pointer"
+                    >
+                      {sch.map((content, ind: number) => (
+                        <div
+                          key={ind}
+                          onClick={(e) =>
+                            handleDeletePost(e, content, item.time)
+                          }
+                          className={`p-3 ${
+                            content.published ? "bg-pink-500" : "bg-green-600"
+                          }  mb-2 cursor-pointer rounded-md text-xs`}
+                        >
+                          <p className="mb-2 text-gray-700">
+                            {content.minutes === 0
+                              ? "o'clock"
+                              : `at ${content.minutes} minutes past`}
+                          </p>
+                          <p className=" text-white">{content.content}</p>
+                        </div>
+                      ))}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
