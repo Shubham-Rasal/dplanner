@@ -88,13 +88,13 @@ const TurboBuilder = () => {
               refX="0"
               refY="0"
               markerUnits="strokeWidth"
-              markerWidth="10"
-              markerHeight="10"
+              markerWidth="100"
+              markerHeight="100"
               orient="auto"
             >
               <circle
                 stroke="#fff"
-                strokeOpacity="0.75"
+                strokeOpacity="1"
                 r="1"
                 cx="3px"
                 cy="0"

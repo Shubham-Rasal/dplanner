@@ -1,5 +1,4 @@
 "use client";
-import { EditorCanvasCardType } from "@/lib/types";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
@@ -11,12 +10,8 @@ import { useFlowStore } from "@/components/turbo/store";
 import { Node } from "reactflow";
 import { TwitterIcon } from "lucide-react";
 
-type Props = {
-  nodes: Node<EditorCanvasCardType>[];
-};
 
 const EditorCanvasSidebar = () => {
-  const { selectedNode } = useFlowStore();
 
   return (
     <aside>
@@ -34,7 +29,7 @@ const EditorCanvasSidebar = () => {
         </TabsContent>
         <TabsContent value="settings" className="-mt-6">
           <div className="px-2 py-4 text-center text-xl font-bold">
-            {selectedNode.data.title}
+           Title will go here TODO
           </div>
           <div className="">Input</div>
           <div className="">Actions</div>

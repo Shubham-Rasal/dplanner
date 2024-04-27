@@ -18,7 +18,7 @@ export function Canvas() {
       className="min-h-[200px] rounded-lg border"
     >
       <ResizablePanel defaultSize={70}>
-        <TurboBuilder />
+          <TurboBuilder />
       </ResizablePanel>
       <ResizableHandle withHandle />
       <ResizablePanel defaultSize={30}>

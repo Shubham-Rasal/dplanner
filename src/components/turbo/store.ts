@@ -17,34 +17,37 @@ import { create } from "zustand";
 import * as z from "zod";
 import { v4 } from "uuid";
 import { useCallback } from "react";
-import {
-  EditorCanvasCardType,
-  EditorCanvasTypes,
-  EditorNodeType,
-} from "@/lib/types";
+
 import { EditorCanvasDefaultCards } from "@/lib/constant";
 
 export interface RFState {
-  nodes: Node<EditorCanvasCardType>[];
+  nodes: Node[];
   edges: Edge[];
-  selectedNode: EditorNodeType;
   onNodesChange: OnNodesChange;
   onEdgesChange: OnEdgesChange;
   onConnect: OnConnect;
   onDragOver: (event: React.DragEvent<HTMLDivElement>) => void;
   onDrop: (event: React.DragEvent<HTMLDivElement>) => void;
   // onTouchEnd: (event: React.TouchEvent<HTMLDivElement>) => void;
-  createNode: (data: EditorCanvasCardType) => void;
   deleteNode: (nodeId: string) => void;
-  setSelectedNode: (node: EditorNodeType) => void;
 }
 
 export const useFlowStore = create<RFState>((set, get) => ({
   nodes: [
     {
-      id: "13o4ijf034jforefij3409uj",
+      id: "1",
       type: "TurboNode",
       position: { x: 200, y: 300 },
+      data: {
+        description: "This is desc",
+        title: "This is a title",
+        type: "Twitter",
+      },
+    },
+    {
+      id: "2",
+      type: "TurboNode",
+      position: { x: 300, y: 300 },
       data: {
         description: "This is desc",
         title: "This is a title",
@@ -62,25 +65,25 @@ export const useFlowStore = create<RFState>((set, get) => ({
     },
   ],
 
-  selectedNode: {
-    data: {
-      completed: false,
-      current: false,
-      description: "",
-      metadata: {},
-      title: "",
-      type: "Twitter",
-    },
-    id: "21jkd34rj-dj34",
-    position: { x: 1000, y: 0 },
-    type: "Trigger",
-  },
+  // selectedNode: {
+  //   data: {
+  //     completed: false,
+  //     current: false,
+  //     description: "",
+  //     metadata: {},
+  //     title: "",
+  //     type: "Twitter",
+  //   },
+  //   id: "21jkd34rj-dj34",
+  //   position: { x: 1000, y: 0 },
+  //   type: "Trigger",
+  // },
 
-  setSelectedNode: (node: EditorNodeType) => {
-    set({
-      selectedNode: node,
-    });
-  },
+  // setSelectedNode: (node: EditorNodeType) => {
+  //   set({
+  //     selectedNode: node,
+  //   });
+  // },
 
   onNodesChange: (changes: NodeChange[]) => {
     set({
@@ -120,14 +123,14 @@ export const useFlowStore = create<RFState>((set, get) => ({
       y: event.clientY - boundingRect.y,
     };
 
-    const newNode: EditorNodeType = {
+    const newNode: Node= {
       id: v4(),
       position: position,
       type: "TurboNode",
       data: {
         description: cardValue.description,
         title: nodeType,
-        type: cardValue.type as EditorCanvasTypes,
+        type: cardValue.type,
       },
     };
 
@@ -158,25 +161,25 @@ export const useFlowStore = create<RFState>((set, get) => ({
     });
   },
 
-  createNode: (data: EditorCanvasCardType) => {
-    const { description } = EditorCanvasDefaultCards[data.type];
+  // createNode: (data: EditorCanvasCardType) => {
+  //   const { description } = EditorCanvasDefaultCards[data.type];
 
-    const newNode: EditorNodeType = {
-      id: v4(),
-      position: { x: 0, y: 0 },
-      data: {
-        description,
-        title: data.title,
-        type: data.type,
-      },
+  //   const newNode: EditorNodeType = {
+  //     id: v4(),
+  //     position: { x: 0, y: 0 },
+  //     data: {
+  //       description,
+  //       title: data.title,
+  //       type: data.type,
+  //     },
 
-      type: "TurboNode",
-    };
+  //     type: "TurboNode",
+  //   };
 
-    set({
-      nodes: [...get().nodes, newNode],
-    });
-  },
+  //   set({
+  //     nodes: [...get().nodes, newNode],
+  //   });
+  // },
 
   deleteEdge: (edgeId: string) => {
     set({

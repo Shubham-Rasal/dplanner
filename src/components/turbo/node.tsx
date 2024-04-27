@@ -1,12 +1,11 @@
 import React, { memo, ReactNode, useMemo } from "react";
 import { Handle, NodeProps, Position } from "reactflow";
 import { LockClosedIcon, LockOpen2Icon } from "@radix-ui/react-icons";
-import { CheckCircle, TwitterIcon } from "lucide-react";
+import { CheckCircle, TwitchIcon } from "lucide-react";
 import { Card, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import clsx from "clsx";
 import { useFlowStore } from "./store";
 import { Badge } from "@/components/ui/badge";
-import { EditorCanvasCardType, EditorNodeType } from "@/lib/types";
 import {
   ContextMenu,
   ContextMenuCheckboxItem,
@@ -30,20 +29,20 @@ import {
 //   description: string;
 // };
 
-const TurboNode = (props: NodeProps<EditorCanvasCardType>) => {
+const TurboNode = (props: NodeProps) => {
   const { data } = props;
   console.log(data);
-  const { setSelectedNode, nodes, selectedNode, deleteNode } = useFlowStore();
+  const { nodes, deleteNode } = useFlowStore();
 
   const logo = useMemo(() => {
-    return <TwitterIcon />;
+    return <TwitchIcon type="Twitter" />;
   }, []);
   return (
     <>
       <Handle
         position={Position.Top}
         type="target"
-        className="!-bottom-2 !h-4 !w-4 dark:bg-neutral-800 z-10"
+        className="!-bottom-2 !h-4 !w-4 dark:bg-neutral-800 border rounded-full border-neutral-100  z-10"
       />
       <ContextMenu>
         <ContextMenuContent>
@@ -57,11 +56,11 @@ const TurboNode = (props: NodeProps<EditorCanvasCardType>) => {
 
         <ContextMenuTrigger className="flex  items-center justify-center rounded-md border border-dashed text-sm">
           <Card
-            onClick={() => {
-              const nodeToSet = nodes.find((node) => node.id === props.id);
-              const node = nodeToSet as EditorNodeType;
-              setSelectedNode(node);
-            }}
+            // onClick={() => {
+            //   const nodeToSet = nodes.find((node) => node.id === props.id);
+            //   const node = nodeToSet as EditorNodeType;
+            //   setSelectedNode(node);
+            // }}
             className={`relative max-w-[400px] dark:border-muted-foreground/70`}
           >
             <CardHeader className="flex flex-row items-end gap-4">
@@ -88,7 +87,7 @@ const TurboNode = (props: NodeProps<EditorCanvasCardType>) => {
         </ContextMenuTrigger>
       </ContextMenu>
       <Handle
-        className="!-bottom-2 !h-4 !w-4 dark:bg-neutral-800"
+        className="!-bottom-2 !h-4 !w-4 dark:bg-neutral-800  border rounded-full border-neutral-100 z-10"
         type="source"
         position={Position.Bottom}
         id="a"
