@@ -8,10 +8,9 @@ import {
 } from "@/components/ui/resizable";
 import EditorCanvasSidebar from "./editor-canvas-sidebar";
 import { useEdgesState, useNodesState } from "reactflow";
-import { useFlowStore } from "@/components/turbo/store";
+import { useFlowStore, useWorkflowStore } from "@/components/turbo/store";
 
 export function Canvas() {
-  const { nodes, edges } = useFlowStore();
   return (
     <ResizablePanelGroup
       direction="horizontal"
@@ -21,7 +20,7 @@ export function Canvas() {
           <TurboBuilder />
       </ResizablePanel>
       <ResizableHandle withHandle />
-      <ResizablePanel defaultSize={30}>
+      <ResizablePanel defaultSize={40} minSize={40}>
         <div className="flex h-full items-center justify-center p-6">
           <EditorCanvasSidebar />
         </div>

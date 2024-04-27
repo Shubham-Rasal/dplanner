@@ -19,6 +19,7 @@ import { v4 } from "uuid";
 import { useCallback } from "react";
 
 import { EditorCanvasDefaultCards } from "@/lib/constant";
+import { AppTypes } from "@/lib/types";
 
 export interface RFState {
   nodes: Node[];
@@ -126,8 +127,8 @@ export const useFlowStore = create<RFState>((set, get) => ({
     //get bounding rect
     console.log(JSON.parse(data));
 
-    const { nodeType, cardValue} = JSON.parse(data);
-    console.log(cardValue, nodeType)
+    const { nodeType, cardValue } = JSON.parse(data);
+    console.log(cardValue, nodeType);
     //type cardVAlue to EditorCanvasCardType
 
     const target = event.target as HTMLElement;
@@ -139,7 +140,7 @@ export const useFlowStore = create<RFState>((set, get) => ({
       y: event.clientY - boundingRect.y,
     };
 
-    const newNode: Node= {
+    const newNode: Node = {
       id: v4(),
       position: position,
       type: "TurboNode",
@@ -202,4 +203,67 @@ export const useFlowStore = create<RFState>((set, get) => ({
       edges: get().edges.filter((edge) => edge.id !== edgeId),
     });
   },
+}));
+
+export interface WorkflowState {
+  workflowId: string;
+  apps: AppTypes[];
+  name: string;
+  desc: string;
+  nodes: Node[];
+  edges: Edge[];
+}
+
+export const useWorkflowStore = create<WorkflowState>((set, get) => ({
+  workflowId: "1",
+  apps: ["Github", "Leetcode", "Notion", "Twitter"],
+  name: "Test Workflow",
+  desc: "test workflow",
+  nodes: [
+    {
+      id: "1",
+      type: "TurboNode",
+      position: { x: 500, y: 300 },
+      data: {
+        description: "This is desc",
+        title: "This is a title",
+        type: "Github",
+      },
+    },
+    {
+      id: "2",
+      type: "TurboNode",
+      position: { x: 90, y: 300 },
+      data: {
+        description: "This is desc",
+        title: "This is a title",
+        type: "Leetcode",
+      },
+    },
+    {
+      id: "3",
+      type: "TurboNode",
+      position: { x: 260, y: 600 },
+      data: {
+        description: "This is desc",
+        title: "This is a title",
+        type: "Twitter",
+      },
+    },
+  ],
+
+  edges: [
+    {
+      id: "e1-3",
+      source: "1",
+      target: "3",
+      animated: true,
+    },
+    {
+      id: "e1-2",
+      source: "2",
+      target: "3",
+      animated: true,
+    },
+  ],
 }));
