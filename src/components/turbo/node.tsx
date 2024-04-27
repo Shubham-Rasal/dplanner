@@ -21,6 +21,7 @@ import {
   ContextMenuSubTrigger,
   ContextMenuTrigger,
 } from "@/components/ui/context-menu";
+import EditorCanvasIconHelper from "@/app/(main)/workflows/_components/icon-helper";
 
 // export type TurboNodeData = {
 //   type: "trigger" | "action";
@@ -35,8 +36,8 @@ const TurboNode = (props: NodeProps) => {
   const { nodes, deleteNode } = useFlowStore();
 
   const logo = useMemo(() => {
-    return <TwitchIcon type="Twitter" />;
-  }, []);
+    return <EditorCanvasIconHelper type={data.type} />;
+  }, [data.type]);
   return (
     <>
       <Handle
@@ -68,13 +69,6 @@ const TurboNode = (props: NodeProps) => {
               <div className="flex flex-col gap-2 w-full">
                 <CardTitle className="text-md">{data.title}</CardTitle>
                 <CardDescription>
-                  <p className="text-xs text-muted-foreground/50">
-                    <b className="text-muted-foreground/80">ID: </b>
-                    {
-                      //reduce the id to 123...456
-                      props.id.slice(0, 3) + "..." + props.id.slice(-3)
-                    }
-                  </p>
                   <p>{data.description}</p>
                 </CardDescription>
               </div>

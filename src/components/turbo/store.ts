@@ -40,9 +40,9 @@ export const useFlowStore = create<RFState>((set, get) => ({
       type: "TurboNode",
       position: { x: 500, y: 300 },
       data: {
-        description: "This is desc",
-        title: "This is a title",
-        type: "Github",
+        description: "Check daily question count",
+        title: "Leetcode",
+        type: "Leetcode",
       },
     },
     {
@@ -50,9 +50,9 @@ export const useFlowStore = create<RFState>((set, get) => ({
       type: "TurboNode",
       position: { x: 90, y: 300 },
       data: {
-        description: "This is desc",
-        title: "This is a title",
-        type: "Leetcode",
+        description: "This checks the daily contributions",
+        title: "Github",
+        type: "Github",
       },
     },
     {
@@ -60,8 +60,8 @@ export const useFlowStore = create<RFState>((set, get) => ({
       type: "TurboNode",
       position: { x: 260, y: 600 },
       data: {
-        description: "This is desc",
-        title: "This is a title",
+        description: "Tweet if failed to solve or contribute",
+        title: "Tweet",
         type: "Twitter",
       },
     },
@@ -212,9 +212,17 @@ export interface WorkflowState {
   desc: string;
   nodes: Node[];
   edges: Edge[];
+  setName: (name: string) => void;
+  setDesc: (desc: string) => void;
 }
 
 export const useWorkflowStore = create<WorkflowState>((set, get) => ({
+  setDesc(desc: string) {
+    set({ desc });
+  },
+  setName(name: string) {
+    set({ name });
+  },
   workflowId: "1",
   apps: ["Github", "Leetcode", "Notion", "Twitter"],
   name: "Test Workflow",
@@ -225,9 +233,9 @@ export const useWorkflowStore = create<WorkflowState>((set, get) => ({
       type: "TurboNode",
       position: { x: 500, y: 300 },
       data: {
-        description: "This is desc",
-        title: "This is a title",
-        type: "Github",
+        description: "Check daily question count",
+        title: "Leetcode",
+        type: "Leetcode",
       },
     },
     {
@@ -235,9 +243,9 @@ export const useWorkflowStore = create<WorkflowState>((set, get) => ({
       type: "TurboNode",
       position: { x: 90, y: 300 },
       data: {
-        description: "This is desc",
-        title: "This is a title",
-        type: "Leetcode",
+        description: "This checks the daily contributions",
+        title: "Github",
+        type: "Github",
       },
     },
     {
@@ -245,8 +253,8 @@ export const useWorkflowStore = create<WorkflowState>((set, get) => ({
       type: "TurboNode",
       position: { x: 260, y: 600 },
       data: {
-        description: "This is desc",
-        title: "This is a title",
+        description: "Tweet if failed to solve or contribute",
+        title: "Tweet",
         type: "Twitter",
       },
     },

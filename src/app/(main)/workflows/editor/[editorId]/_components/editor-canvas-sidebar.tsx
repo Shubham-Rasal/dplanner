@@ -3,38 +3,36 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import { NumberInput } from "@tremor/react";
+
 import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import React, { useEffect } from "react";
 import { Separator } from "@/components/ui/separator";
-import { EditorCanvasDefaultCards } from "@/lib/constant";
-
 import { useFlowStore, useWorkflowStore } from "@/components/turbo/store";
 import { Node } from "reactflow";
 import { Loader2, TwitterIcon } from "lucide-react";
 import EditorCanvasIconHelper from "../../../_components/icon-helper";
+import { Label } from "@/components/ui/label";
+import { Slider } from "@/components/ui/slider";
+import { Textarea } from "@/components/ui/textarea";
 
 const EditorCanvasSidebar = () => {
   const { apps, workflowId, name, desc } = useWorkflowStore();
+  const [contributions, setContributions] = React.useState([3]);
+  const [leetcode, setLeetcode] = React.useState([3]);
 
   return (
     <aside>
       <Tabs
         defaultValue="apps"
-        className="h-screen w-full overflow-scroll pb-24"
+        className="h-screen w-full overflow-scroll pb-12"
       >
         <TabsList className="bg-transparent w-full p-8">
           <TabsTrigger value="settings">Settings</TabsTrigger>
@@ -86,12 +84,107 @@ const EditorCanvasSidebar = () => {
           </Card>
         </TabsContent>
         <TabsContent value="settings" className="-mt-6">
-          <div className="px-2 py-4 text-center text-xl font-bold">{name}</div>
-          <div className="">Input</div>
-          <div className="">Actions</div>
-          <div className="">Output</div>
-          <button>Delete</button>
-          <button>Save</button>
+          <div className="px-2 py-4 text-start text-xl font-bold">{name}</div>
+          <div className="flex flex-col gap-3">
+            <Card className="w-[350px]">
+              <CardHeader>
+                <CardTitle>Github</CardTitle>
+                <CardDescription>
+                  Update the settings for your workflow.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <form>
+                  <div className="grid w-full items-center gap-4">
+                    <div className="flex flex-col space-y-1.5">
+                      <Label
+                        htmlFor="name"
+                        className="text-muted-foreground flex justify-between p-2 w-full"
+                      >
+                        <span className="text-muted-foreground">
+                          {contributions}
+                        </span>
+                        Daily Contribution Count
+                      </Label>
+                      <Slider
+                        defaultValue={[3]}
+                        max={10}
+                        min={1}
+                        step={1}
+                        value={contributions}
+                        onValueChange={(value) => setContributions(value)}
+                      />
+                    </div>
+                  </div>
+                </form>
+              </CardContent>
+              <CardFooter className="flex justify-between">
+                <Button>Save</Button>
+              </CardFooter>
+            </Card>
+            <Card className="w-[350px]">
+              <CardHeader>
+                <CardTitle>Leetcode</CardTitle>
+                <CardDescription>
+                  Update the settings for your workflow.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <form>
+                  <div className="grid w-full items-center gap-4">
+                    <div className="flex flex-col space-y-1.5">
+                      <Label
+                        htmlFor="name"
+                        className="text-muted-foreground flex justify-between p-2 w-full"
+                      >
+                        <span className="text-muted-foreground">
+                          {leetcode}
+                        </span>
+                        Daily Problem Solved
+                      </Label>
+                      <Slider
+                        defaultValue={[3]}
+                        max={10}
+                        min={1}
+                        step={1}
+                        value={leetcode}
+                        onValueChange={(value) => setLeetcode(value)}
+                      />
+                    </div>
+                  </div>
+                </form>
+              </CardContent>
+              <CardFooter className="flex justify-between">
+                <Button>Save</Button>
+              </CardFooter>
+            </Card>
+            <Card className="w-[350px]">
+              <CardHeader>
+                <CardTitle>Leetcode</CardTitle>
+                <CardDescription>
+                  Update the settings for your workflow.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <form>
+                  <div className="grid w-full items-center gap-4">
+                    <div className="flex flex-col space-y-1.5">
+                      <Label
+                        htmlFor="name"
+                        className="text-muted-foreground flex justify-between p-2 w-full"
+                      >
+                        This is the Tweet that will be sent
+                      </Label>
+                      <Textarea placeholder="Type your message here." />
+                    </div>
+                  </div>
+                </form>
+              </CardContent>
+              <CardFooter className="flex justify-between">
+                <Button>Save</Button>
+              </CardFooter>
+            </Card>
+          </div>
         </TabsContent>
       </Tabs>
     </aside>

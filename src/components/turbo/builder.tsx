@@ -21,7 +21,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { useFlowStore, RFState } from "./store";
+import { useFlowStore, RFState, useWorkflowStore } from "./store";
 
 const selector = (state: RFState) => ({
   nodes: state.nodes,
@@ -51,6 +51,8 @@ const defaultEdgeOptions = {
 const TurboBuilder = () => {
   const { nodes, edges, onNodesChange, onEdgesChange, onConnect } =
     useFlowStore(selector, shallow);
+
+  // const { nodes } = useWorkflowStore();
 
   const onDrop = useFlowStore((state) => state.onDrop);
   const onDragOver = useFlowStore((state) => state.onDragOver);
@@ -92,13 +94,7 @@ const TurboBuilder = () => {
               markerHeight="100"
               orient="auto"
             >
-              <circle
-                stroke="#fff"
-                strokeOpacity="1"
-                r="1"
-                cx="3px"
-                cy="0"
-              />
+              <circle stroke="#fff" strokeOpacity="1" r="1" cx="3px" cy="0" />
             </marker>
           </defs>
         </svg>
