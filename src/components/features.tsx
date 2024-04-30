@@ -5,7 +5,7 @@
  */
 export default function Features() {
     return (
-      <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48 bg-zince-900">
+      <section className="w-full pt-12 md:py-24 lg:py-24 xl:pt-48 xl:pb-32 bg-zince-900">
         <div className="container px-4 md:px-6">
           <div className="grid gap-6 items-center">
             <div className="flex flex-col justify-center space-y-8 text-center">
@@ -18,7 +18,7 @@ export default function Features() {
                 </p>
               </div>
               <div className="w-full max-w-full space-y-4 mx-auto">
-                <div className="grid grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                   <div className="flex flex-col items-center space-y-2 border-gray-800 p-4 rounded-lg">
                     <div className="p-2 bg-black bg-opacity-50 rounded-full">
                       <InboxIcon className="text-white h-6 w-6 mb-2 opacity-75" />

@@ -37,7 +37,10 @@ export default function RootLayout({
           >
             <SupabaseUserProvider>
               <BillingProvider>
-                <ModalProvider>{children}</ModalProvider>
+                <ModalProvider>
+                  {children}
+                  <Footer />
+                </ModalProvider>
 
                 <Toaster />
               </BillingProvider>
