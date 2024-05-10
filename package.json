@@ -14,6 +14,7 @@
     "up": "drizzle-kit up:pg"
   },
   "dependencies": {
+    "@ai-sdk/openai": "^0.0.9",
     "@hookform/resolvers": "^3.3.2",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-alert-dialog": "^1.0.5",
@@ -44,6 +45,7 @@
     "@tsparticles/engine": "^3.3.0",
     "@tsparticles/react": "^3.0.0",
     "@tsparticles/slim": "^3.3.0",
+    "ai": "^3.1.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "cmdk": "^0.2.0",
@@ -67,6 +69,7 @@
     "sonner": "^1.4.41",
     "tailwind-merge": "^2.2.2",
     "tailwindcss-animate": "^1.0.7",
+    "thirdweb": "^5.15.0",
     "uuid": "^9.0.1",
     "vaul": "^0.8.0",
     "zod": "^3.22.4",
