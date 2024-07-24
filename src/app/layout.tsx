@@ -9,6 +9,7 @@ import { BillingProvider } from "@/providers/billing-provider";
 import ModalProvider from "@/providers/modal-provider";
 import { ViewTransitions } from "next-view-transitions";
 import Footer from "@/components/footer";
+import CSPostHogProvider from "@/components/providers/posthog-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -38,8 +39,7 @@ export default function RootLayout({
             <SupabaseUserProvider>
               <BillingProvider>
                 <ModalProvider>
-                  {children}
-                 
+                  <CSPostHogProvider>{children}</CSPostHogProvider>
                 </ModalProvider>
 
                 <Toaster />
