@@ -39,7 +39,7 @@ export default function RootLayout({
               <BillingProvider>
                 <ModalProvider>
                   {children}
-                  <Footer />
+                 
                 </ModalProvider>
 
                 <Toaster />

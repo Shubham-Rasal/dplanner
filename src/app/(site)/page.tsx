@@ -62,6 +62,7 @@ const HomePage = () => {
         </h1>
         <PricingTable />
       </section>
+      <Footer />
     </main>
   );
 };
