@@ -7,16 +7,20 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <div className="fixed bottom-0 w-full dark bg-neutral-900 opacity-90 backdrop-blur-lg text-white py-4">
+    <div className=" w-full dark bg-neutral-900 opacity-90 backdrop-blur-lg text-white py-4">
       <div className="container mx-auto px-4 md:px-6 flex flex-col md:flex-row items-center justify-between">
         <div className="flex items-center space-x-4">
           <Link
-          
-          className="text-white hover:text-gray-300" href="https://github.com/Shubham-Rasal/flow-forge">
+            className="text-white hover:text-gray-300"
+            href="https://github.com/Shubham-Rasal/flow-forge"
+          >
             <GithubIcon className="h-6 w-6" />
             <span className="sr-only">GitHub</span>
           </Link>
-          <Link className="text-white hover:text-gray-300" href="https://x.com/bluequbit">
+          <Link
+            className="text-white hover:text-gray-300"
+            href="https://x.com/bluequbit"
+          >
             <TwitterIcon className="h-6 w-6" />
             <span className="sr-only">Twitter</span>
           </Link>
